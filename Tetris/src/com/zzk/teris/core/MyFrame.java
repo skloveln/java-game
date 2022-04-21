@@ -1,12 +1,10 @@
 package com.zzk.teris.core;
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Image;
+import com.zzk.teris.constant.Constant;
+
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import com.zzk.teris.constant.Constant;
 
 public class MyFrame extends Frame{
 	/**
@@ -16,13 +14,13 @@ public class MyFrame extends Frame{
 	public static int sleepTime = 30;
 
 	/**
-	 * ¼ÓÔØ´°Ìå
+	 * åŠ è½½çª—ä½“
 	 */
 	public void loadFrame(){
-		this.setTitle("¶íÂŞË¹·½¿é");
+		this.setTitle("ä¿„ç½—æ–¯æ–¹å—");
 		this.setSize(Constant.FRAME_WIDTH, Constant.FRAME_HEIGHT);
 		this.setBackground(Color.WHITE);
-		this.setLocationRelativeTo(null);//¾ÓÖĞ
+		this.setLocationRelativeTo(null);//å±…ä¸­
 		this.setResizable(false);
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -36,7 +34,7 @@ public class MyFrame extends Frame{
 		new MyThread().start();
 	}
 	/**
-	 * ·ÀÖ¹Í¼Æ¬ÉÁË¸
+	 * é˜²æ­¢å›¾ç‰‡é—ªçƒ
 	 * 
 	 * @param g
 	 */
@@ -56,7 +54,7 @@ public class MyFrame extends Frame{
 		g.drawImage(backImg, 0, 0, null);
 	}
 	/**
-	 * ÕâÖÖ ´´½¨Ò»¸öÖØĞÂ»­µÄÏß³ÌÄÚ²¿Àà
+	 * è¿™ç§ åˆ›å»ºä¸€ä¸ªé‡æ–°ç”»çš„çº¿ç¨‹å†…éƒ¨ç±»
 	 * 
 	 * @param args
 	 */

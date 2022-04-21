@@ -1,15 +1,12 @@
 package com.zzk.teris.core;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Rectangle;
+import com.zzk.teris.client.TerisClient;
+import com.zzk.teris.constant.Constant;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.zzk.teris.client.TerisClient;
-import com.zzk.teris.constant.Constant;
 
 public class Block implements Drawable, Moveable {
 
@@ -28,17 +25,17 @@ public class Block implements Drawable, Moveable {
 		updateCenterPoint();
 	}
 
-	private boolean rotate;// Ğı×ª·½¿é
-	private boolean left;// Ğı×ª·½¿é
-	private boolean right;// Ğı×ª·½¿é
-	private boolean down;// Ğı×ª·½¿é
+	private boolean rotate;// æ—‹è½¬æ–¹å—
+	private boolean left;// æ—‹è½¬æ–¹å—
+	private boolean right;// æ—‹è½¬æ–¹å—
+	private boolean down;// æ—‹è½¬æ–¹å—
 	private int downSpeed = 1;
 	private Point center = new Point(0, 0);
 
 	private int state;
-	public static final int STATE_ACTIVE = 1;// »îÔ¾ÔË¶¯Ì¬
-	public static final int STATE_STOP = 2;// ¾²Ö¹Ì¬
-	public static final int STATE_STOPED = 3;// ÍêÈ«¾²Ö¹Ì¬
+	public static final int STATE_ACTIVE = 1;// æ´»è·ƒè¿åŠ¨æ€
+	public static final int STATE_STOP = 2;// é™æ­¢æ€
+	public static final int STATE_STOPED = 3;// å®Œå…¨é™æ­¢æ€
 
 	private Color color;
 
@@ -57,7 +54,7 @@ public class Block implements Drawable, Moveable {
 	int count = 1;
 
 	/**
-	 * Ğı×ª·½¿é
+	 * æ—‹è½¬æ–¹å—
 	 */
 	private void rotate() {
 		if (x <= Constant.GAME_X_LEFT) {
@@ -129,16 +126,16 @@ public class Block implements Drawable, Moveable {
 
 	@Override
 	public void draw(Graphics g) {
-		updateCenterPoint();// ¸üĞÂÖĞĞÄµã
-		saveSquares();// ±£´æsquare
+		updateCenterPoint();// æ›´æ–°ä¸­å¿ƒç‚¹
+		saveSquares();// ä¿å­˜square
 		switch (state) {
 		case STATE_ACTIVE:
-			outOfBounds();// ´¦ÀíÔ½½çÎÊÌâ
-			move();// ÒÆ¶¯
-			drawContent(g);// »æÖÆ
+			outOfBounds();// å¤„ç†è¶Šç•Œé—®é¢˜
+			move();// ç§»åŠ¨
+			drawContent(g);// ç»˜åˆ¶
 			break;
 		case STATE_STOP:
-			saveSquares();// ±£´æsquare
+			saveSquares();// ä¿å­˜square
 			this.state = STATE_STOPED;
 		}
 	}
@@ -183,7 +180,7 @@ public class Block implements Drawable, Moveable {
 	}
 
 	/**
-	 * ´¦Àí±ß½ç
+	 * å¤„ç†è¾¹ç•Œ
 	 */
 	public void outOfBounds() {
 		if (maxY == (Constant.GAME_Y_DOWN - Constant.BLOCK_HEIGHT / 2 - Constant.BLOCK_SPACE)) {
@@ -208,7 +205,7 @@ public class Block implements Drawable, Moveable {
 	int maxY;
 
 	/**
-	 * ¸üĞÂÖĞĞÄµã
+	 * æ›´æ–°ä¸­å¿ƒç‚¹
 	 */
 	public void updateCenterPoint() {
 		minX = maxX = (int) squareList.get(0).getCenterX();
@@ -232,7 +229,7 @@ public class Block implements Drawable, Moveable {
 	}
 
 	/**
-	 * ¸ù¾İtypeÌî³äsquareList
+	 * æ ¹æ®typeå¡«å……squareList
 	 */
 	private void initSquareList() {
 		switch (type) {
@@ -301,7 +298,7 @@ public class Block implements Drawable, Moveable {
 	}
 
 	/**
-	 * ¼üÅÌ°´ÏÂÊÂ¼ş
+	 * é”®ç›˜æŒ‰ä¸‹äº‹ä»¶
 	 * 
 	 * @param e
 	 */

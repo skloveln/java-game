@@ -1,13 +1,10 @@
 package com.neusoft.planewar.core;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.util.List;
-
 import com.neusoft.planewar.client.PlaneWarClient;
 import com.neusoft.planewar.constant.Constant;
 import com.neusoft.planewar.util.ImageUtil;
-import com.neusoft.planewar.util.MusicUtil;
+
+import java.util.List;
 
 public class Missile extends PlaneWarObject {
 	boolean live;
@@ -40,7 +37,7 @@ public class Missile extends PlaneWarObject {
 
 	private int theta;
 	/**
-	 * ×Óµ¯»÷´ò·É»úµÄ·½·¨
+	 * å­å¼¹å‡»æ‰“é£æœºçš„æ–¹æ³•
 	 */
 	public boolean hitPlane(Plane p){
 		if(this.getRectangle().intersects(p.getRectangle())&&this.good!=p.isGood()&&p.live){
@@ -57,7 +54,7 @@ public class Missile extends PlaneWarObject {
 		}
 	}
 	/**
-	 * ×Óµ¯»÷´ò·É»úµÄ·½·¨
+	 * å­å¼¹å‡»æ‰“é£æœºçš„æ–¹æ³•
 	 */
 	public boolean hitPlanes(List<EnemyPlane> enemyPlanes){
 		for (EnemyPlane enemyPlane : enemyPlanes) {
@@ -70,19 +67,19 @@ public class Missile extends PlaneWarObject {
 	@Override
 	public void move() {
 		switch (type) {
-		case 100://boss×Óµ¯1
+		case 100://bosså­å¼¹1
 			x+=Math.sin(Math.toRadians(theta))*speed;
 			y-=Math.cos(Math.toRadians(theta))*speed;
 			break;
-		case 101://boss×Óµ¯2
+		case 101://bosså­å¼¹2
 			x-=Math.sin(Math.toRadians(theta))*speed*2;
 			y-=Math.cos(Math.toRadians(theta))*speed;
 			break;
-		case 102://boss×Óµ¯3
+		case 102://bosså­å¼¹3
 			x+=Math.sin(Math.toRadians(theta))*speed;
 			y+=Math.cos(Math.toRadians(theta))*speed*2;
 			break;
-		case 104://boss×Óµ¯4
+		case 104://bosså­å¼¹4
 			x-=Math.sin(Math.toRadians(theta))*speed;
 			y+=Math.cos(Math.toRadians(theta))*speed*2;
 			break;
@@ -124,7 +121,7 @@ public class Missile extends PlaneWarObject {
 	}
 
 	/**
-	 * ×Óµ¯³ö½ç
+	 * å­å¼¹å‡ºç•Œ
 	 */
 	private void outOfBounds() {
 		if ((x >= (Constant.GAME_WIDTH-width) || x <= 0) || (y >= (Constant.GAME_HEIGHT - height) || y <= 0)) {

@@ -1,12 +1,11 @@
 package com.neusoft.planewar.core;
 
-import java.awt.Graphics;
-import java.awt.Image;
-
 import com.neusoft.planewar.constant.Constant;
 import com.neusoft.planewar.util.ImageUtil;
+
+import java.awt.*;
 /**
- * Ñ­»·±³¾°Í¼
+ * å¾ªçŽ¯èƒŒæ™¯å›¾
  * @author zzk
  *
  */

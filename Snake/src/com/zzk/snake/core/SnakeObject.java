@@ -6,17 +6,17 @@ import java.awt.Rectangle;
 
 public abstract class SnakeObject implements Drawable {
 
-	int x;//ºá×ø±ê
-	int y;//×İ×ø±ê
-	Image img;//Í¼Æ¬
-	int width;//Í¼Æ¬¿í¶È
-	int height;//Í¼Æ¬¸ß¶È
-	public boolean live;//ËÀÍö/´æ»î
+	int x;//æ¨ªåæ ‡
+	int y;//çºµåæ ‡
+	Image img;//å›¾ç‰‡
+	int width;//å›¾ç‰‡å®½åº¦
+	int height;//å›¾ç‰‡é«˜åº¦
+	public boolean live;//æ­»äº¡/å­˜æ´»
 	
 	@Override
 	public abstract void draw(Graphics g);
 	/**
-	 * »ñÈ¡Í¼Æ¬¶ÔÓ¦µÄ¾ØĞÎ
+	 * è·å–å›¾ç‰‡å¯¹åº”çš„çŸ©å½¢
 	 * 
 	 * @return
 	 */

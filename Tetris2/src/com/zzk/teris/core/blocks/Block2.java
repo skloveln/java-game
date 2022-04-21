@@ -1,10 +1,10 @@
 package com.zzk.teris.core.blocks;
 
-import java.awt.Color;
-
 import com.zzk.teris.constant.Constant;
 import com.zzk.teris.core.AbstractBlock;
 import com.zzk.teris.core.Square;
+
+import java.awt.*;
 
 public class Block2 extends AbstractBlock{
 
@@ -13,7 +13,7 @@ public class Block2 extends AbstractBlock{
 	}
 
 	/**
-	 * ª≠∑ΩøÈ
+	 * ÁîªÊñπÂùó
 	 */
 	@Override
 	protected void createSquareList() {

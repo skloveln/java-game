@@ -1,20 +1,13 @@
 package com.zzk.Game_2048.client;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.Random;
-
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-
 import com.zzk.Game_2048.constant.Constant;
 import com.zzk.Game_2048.core.BlockLoader;
 import com.zzk.Game_2048.core.MyFrame;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Client extends MyFrame{
 	
@@ -49,7 +42,7 @@ public class Client extends MyFrame{
 	public static boolean flag=true;
 	public void gameReset(){
 		flag=false;
-		int m = JOptionPane.showOptionDialog(null, "¶Ô²»Æğ , ÓÎÏ·½áÊø ! µã»÷È·¶¨ÖØĞÂ¿ªÊ¼","ÓÎÏ·½áÊø",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,new String[]{"È·¶¨","¹Ø±ÕÓÎÏ·"},"È·¶¨");
+		int m = JOptionPane.showOptionDialog(null, "å¯¹ä¸èµ· , æ¸¸æˆç»“æŸ ! ç‚¹å‡»ç¡®å®šé‡æ–°å¼€å§‹","æ¸¸æˆç»“æŸ",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,new String[]{"ç¡®å®š","å…³é—­æ¸¸æˆ"},"ç¡®å®š");
 		if(m==JOptionPane.YES_OPTION){
 			gameStart=true;
 			flag=true;
@@ -59,24 +52,24 @@ public class Client extends MyFrame{
 		}
 	}
 	/**
-	 * »­·ÖÊı
+	 * ç”»åˆ†æ•°
 	 */
 	private void drawScore(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRoundRect(Constant.BACK_X, Constant.BACK_Y-100, 220, 80, 10, 10);
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Ó×Ô²", Font.BOLD, 30));
-		g.drawString("·ÖÊı:"+BlockLoader.score+"",Constant.BACK_X, Constant.BACK_Y-50);
+		g.setFont(new Font("å¹¼åœ†", Font.BOLD, 30));
+		g.drawString("åˆ†æ•°:"+BlockLoader.score+"",Constant.BACK_X, Constant.BACK_Y-50);
 		
 		g.setColor(Color.GREEN);
 		g.fillRoundRect(Constant.BACK_RIGHT_IN_X+Constant.BLOCK_SPACE-250, Constant.BACK_Y-100, 250, 80, 10, 10);
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Ó×Ô²", Font.BOLD, 30));
-		g.drawString("×î¸ß·Ö:"+BlockLoader.bestScore+"",Constant.BACK_RIGHT_IN_X+Constant.BLOCK_SPACE-250, Constant.BACK_Y-50);
+		g.setFont(new Font("å¹¼åœ†", Font.BOLD, 30));
+		g.drawString("æœ€é«˜åˆ†:"+BlockLoader.bestScore+"",Constant.BACK_RIGHT_IN_X+Constant.BLOCK_SPACE-250, Constant.BACK_Y-50);
 		
 	}
 	/**
-	 * »­±³¾°
+	 * ç”»èƒŒæ™¯
 	 * @param g
 	 */
 	private void drawBasic(Graphics g) {

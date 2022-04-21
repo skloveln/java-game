@@ -1,17 +1,16 @@
 package com.neusoft.planewar.core;
 
-import java.awt.Graphics;
-import java.awt.Image;
-
 import com.neusoft.planewar.client.PlaneWarClient;
 import com.neusoft.planewar.util.ImageUtil;
+
+import java.awt.*;
 
 public class Explode extends PlaneWarObject {
 	
 	public boolean live;
 	public Explode() {
 		super();
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êı´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ„é€ å‡½æ•°å­˜æ ¹
 	}
 
 	public Explode(PlaneWarClient pwc, int x, int y) {

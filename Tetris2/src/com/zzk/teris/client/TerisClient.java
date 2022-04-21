@@ -1,30 +1,21 @@
 package com.zzk.teris.client;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.Random;
-
 import com.zzk.teris.constant.Constant;
 import com.zzk.teris.core.AbstractBlock;
 import com.zzk.teris.core.AbstractBlockFactory;
 import com.zzk.teris.core.MyFrame;
 import com.zzk.teris.core.Square;
-import com.zzk.teris.core.factory.Block1Factory;
-import com.zzk.teris.core.factory.Block2Factory;
-import com.zzk.teris.core.factory.Block3Factory;
-import com.zzk.teris.core.factory.Block4Factory;
-import com.zzk.teris.core.factory.Block5Factory;
-import com.zzk.teris.core.factory.Block6Factory;
-import com.zzk.teris.core.factory.Block7Factory;
+import com.zzk.teris.core.factory.*;
 import com.zzk.teris.core.state.StopedState;
 import com.zzk.teris.util.ImageUtil;
 
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Random;
+
 /**
- * ¿Í»§¶Ë
+ * å®¢æˆ·ç«¯
  * 
  * @author zzk
  */
@@ -34,15 +25,15 @@ public class TerisClient extends MyFrame {
 			new Block1Factory(), new Block2Factory(), new Block3Factory(),
 			new Block4Factory(), new Block5Factory(), new Block6Factory(),
 			new Block7Factory(), };
-	public static final Image failImg = ImageUtil.images.get("fail");// ÓÎÏ·½áÊøÍ¼
+	public static final Image failImg = ImageUtil.images.get("fail");// æ¸¸æˆç»“æŸå›¾
 	public static Square squares[][];
-	public static AbstractBlock nextBlock;// ÏÂÒ»¸ö¿é
-	public static AbstractBlock block;// µ±Ç°¿é
-	public static int score;// ·ÖÊı
-	public static final Random random=new Random();// Ëæ»úÊı²úÉú¶ÔÏó
-	public static boolean fail;// ÓÎÏ·½áÊø×´Ì¬
+	public static AbstractBlock nextBlock;// ä¸‹ä¸€ä¸ªå—
+	public static AbstractBlock block;// å½“å‰å—
+	public static int score;// åˆ†æ•°
+	public static final Random random=new Random();// éšæœºæ•°äº§ç”Ÿå¯¹è±¡
+	public static boolean fail;// æ¸¸æˆç»“æŸçŠ¶æ€
 	{
-		//³õÊ¼»¯ÓÎÏ·²ÎÊı
+		//åˆå§‹åŒ–æ¸¸æˆå‚æ•°
 		squares = new Square[Constant.GAME_HEIGHT / (Constant.BLOCK_HEIGHT + Constant.BLOCK_SPACE)
 				+ 4][Constant.GAME_WIDTH / ((Constant.BLOCK_WIDTH + Constant.BLOCK_SPACE)) + 2];
 		nextBlock = newBlock();
@@ -54,7 +45,7 @@ public class TerisClient extends MyFrame {
 	@Override
 	public void loadFrame() {
 		super.loadFrame();
-		// Ìí¼Ó¼üÅÌ¼àÌıÆ÷
+		// æ·»åŠ é”®ç›˜ç›‘å¬å™¨
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -65,25 +56,25 @@ public class TerisClient extends MyFrame {
 
 	@Override
 	public void paint(Graphics g) {
-		drawBack(g);// »æÖÆ±³¾°
+		drawBack(g);// ç»˜åˆ¶èƒŒæ™¯
 		for (int i = 0; i < squares[20].length; i++) {
-			if (squares[20][i] != null) {//·½¿éµ½´ïÉÏ±ß½ç
+			if (squares[20][i] != null) {//æ–¹å—åˆ°è¾¾ä¸Šè¾¹ç•Œ
 				fail = true;
 			}
 		}
-		if (!fail) {// Èç¹ûÓÎÏ·Î´½áÊø
-			drawActiveBlock(g);// »æÖÆÔË¶¯¿é
-			drawStopSquare(g);// »á³¤¾²Ö¹»ù±¾¿é
-			drawNextBlock(g);// »á³¤ÏÂÒ»¸ö¿é
+		if (!fail) {// å¦‚æœæ¸¸æˆæœªç»“æŸ
+			drawActiveBlock(g);// ç»˜åˆ¶è¿åŠ¨å—
+			drawStopSquare(g);// ä¼šé•¿é™æ­¢åŸºæœ¬å—
+			drawNextBlock(g);// ä¼šé•¿ä¸‹ä¸€ä¸ªå—
 		} else {
-			// »æÖÆÓÎÏ·½áÊøÍ¼
+			// ç»˜åˆ¶æ¸¸æˆç»“æŸå›¾
 			g.drawImage(failImg, (Constant.FRAME_WIDTH - failImg.getWidth(null)) / 2 - 120,
 					(Constant.FRAME_HEIGHT - failImg.getHeight(null)) / 2, null);
 		}
 	}
 
 	/**
-	 * »æÖÆÔË¶¯µÄ·½¿é
+	 * ç»˜åˆ¶è¿åŠ¨çš„æ–¹å—
 	 */
 	private void drawActiveBlock(Graphics g) {
 		if (block.getState() instanceof StopedState) {
@@ -95,21 +86,21 @@ public class TerisClient extends MyFrame {
 	}
 
 	/**
-	 * »æÖÆ¾²Ö¹µÄ·½¿é
+	 * ç»˜åˆ¶é™æ­¢çš„æ–¹å—
 	 * 
 	 * @param g
 	 */
 	private void drawStopSquare(Graphics g) {
-		for (int i = 1; i < squares.length; i++) {// ĞĞºÅ
+		for (int i = 1; i < squares.length; i++) {// è¡Œå·
 			boolean isFull = true;
-			for (int j = 1; j < squares[i].length; j++) {// ÁĞºÅ
+			for (int j = 1; j < squares[i].length; j++) {// åˆ—å·
 				if (squares[i][j] != null) {
 					squares[i][j].draw(g);
 				} else {
 					isFull = false;
 				}
 			}
-			if (isFull) {// Èç¹ûÒ»ĞĞÂúÁË£¬Ïû³ı
+			if (isFull) {// å¦‚æœä¸€è¡Œæ»¡äº†ï¼Œæ¶ˆé™¤
 				eliminate(i);
 				System.out.println(1);
 			}
@@ -117,7 +108,7 @@ public class TerisClient extends MyFrame {
 	}
 
 	/**
-	 * Ïû³ıÖ¸¶¨ĞĞ
+	 * æ¶ˆé™¤æŒ‡å®šè¡Œ
 	 */
 	private void eliminate(int line) {
 		score += 10;
@@ -134,19 +125,19 @@ public class TerisClient extends MyFrame {
 	}
 
 	/**
-	 * ²úÉúĞÂ·½¿é
+	 * äº§ç”Ÿæ–°æ–¹å—
 	 * 
 	 * @return
 	 */
 	private AbstractBlock newBlock() {
-		int startX = Constant.GAME_X_LEFT + 42 * 7;// ¿éµÄ³õÊ¼ºá×ø±ê
-		int startY = Constant.GAME_Y_UP + 1;// ¿é³õÊ¼×İ×ø±ê
+		int startX = Constant.GAME_X_LEFT + 42 * 7;// å—çš„åˆå§‹æ¨ªåæ ‡
+		int startY = Constant.GAME_Y_UP + 1;// å—åˆå§‹çºµåæ ‡
 		return blockFactory[random.nextInt(blockFactory.length)].getBlock(startX, startY,
 				Constant.COLOR_BLOCKS[random.nextInt(Constant.COLOR_BLOCKS.length)]);
 	}
 
 	/**
-	 * »æÖÆ±³¾°
+	 * ç»˜åˆ¶èƒŒæ™¯
 	 * 
 	 * @param g
 	 */
@@ -154,27 +145,27 @@ public class TerisClient extends MyFrame {
 		g.setColor(Color.WHITE);
 		g.fillRect(Constant.GAME_X_LEFT, Constant.GAME_Y_UP, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
 		g.setColor(Color.RED);
-		// »æÖÆºì¿ò
+		// ç»˜åˆ¶çº¢æ¡†
 		for (int i = 1; i <= 6; i++) {
 			g.drawRect(Constant.GAME_X_LEFT - i, Constant.GAME_Y_UP - i, Constant.GAME_WIDTH + 2 * i,
 					Constant.GAME_HEIGHT + 2 * i);
 			g.drawRect(Constant.GAME_X_RIGHT + i, Constant.GAME_Y_UP - i, 300, 300);
 			g.drawRect(Constant.GAME_X_RIGHT + i, Constant.GAME_Y_UP + 300 - i, 300, 300);
 		}
-		// »æÖÆÏÂÒ»¸ö·½¿é
+		// ç»˜åˆ¶ä¸‹ä¸€ä¸ªæ–¹å—
 		drawNextBlock(g);
-		g.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 40));
-		// »æÖÆ·ÖÊı
-		g.drawString("·Ö  Êı :" + score, Constant.GAME_X_RIGHT + 30, Constant.GAME_Y_UP + 350);
+		g.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 40));
+		// ç»˜åˆ¶åˆ†æ•°
+		g.drawString("åˆ†  æ•° :" + score, Constant.GAME_X_RIGHT + 30, Constant.GAME_Y_UP + 350);
 	}
 
 	/**
-	 * »æÖÆÏÂÒ»¸ö·½¿é
+	 * ç»˜åˆ¶ä¸‹ä¸€ä¸ªæ–¹å—
 	 * 
 	 * @param g
 	 */
 	private void drawNextBlock(Graphics g) {
-		g.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 50));
+		g.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 50));
 		g.setColor(Color.BLACK);
 		g.drawString("NEXT", Constant.GAME_X_RIGHT + 50, Constant.GAME_Y_UP + 50);
 		for (Square square : nextBlock.getSquareList()) {
@@ -183,10 +174,10 @@ public class TerisClient extends MyFrame {
 		}
 	}
 	/**
-	 * »ñÈ¡Square¶ÔÏó
-	 * @param square Ğ¡·½¿é
-	 * @param dRow ĞĞÆ«ÒÆ
-	 * @param dCol ÁĞÆ«ÒÆ
+	 * è·å–Squareå¯¹è±¡
+	 * @param square å°æ–¹å—
+	 * @param dRow è¡Œåç§»
+	 * @param dCol åˆ—åç§»
 	 * @return Square
 	 */
 	public static Square getSquare(Square square, int dRow, int dCol) {

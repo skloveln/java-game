@@ -5,16 +5,16 @@ import java.awt.Point;
 import java.util.Stack;
 
 /**
- * ³éÏó½âÊÍÆ÷
+ * æŠ½è±¡è§£é‡Šå™¨
  * @author zzk
  */
 public abstract class AbstractGrammarInterpreter implements Cloneable{
-	protected Point startPoint;// ÆğÊ¼Î»ÖÃ
-	protected double startAngle;// ÆğÊ¼½Ç¶È
-	protected double rotateAngle;// Ğı×ª½Ç
-	protected int length;// Ïß¶Î³¤¶È
-	protected String grammarString;// Óï·¨Ê½
-	protected Stack<AbstractGrammarInterpreter> stack = new Stack<>();// ×´Ì¬Õ»
+	protected Point startPoint;// èµ·å§‹ä½ç½®
+	protected double startAngle;// èµ·å§‹è§’åº¦
+	protected double rotateAngle;// æ—‹è½¬è§’
+	protected int length;// çº¿æ®µé•¿åº¦
+	protected String grammarString;// è¯­æ³•å¼
+	protected Stack<AbstractGrammarInterpreter> stack = new Stack<>();// çŠ¶æ€æ ˆ
 
 	public AbstractGrammarInterpreter() {
 		super();
@@ -80,7 +80,7 @@ public abstract class AbstractGrammarInterpreter implements Cloneable{
 				+ rotateAngle + ", length=" + length +", stack=" + stack + "]";
 	}
 	/**
-	 * ½âÊÍ
+	 * è§£é‡Š
 	 * @param g
 	 */
 	public abstract void interpret(Graphics g);

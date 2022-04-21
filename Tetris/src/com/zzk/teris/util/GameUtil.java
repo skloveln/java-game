@@ -1,21 +1,18 @@
 package com.zzk.teris.util;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.imageio.ImageIO;
-
 public class GameUtil {
 
 	/**
-	 * ¸ù¾İÍ¼Æ¬µÄÏà¶ÔÂ·¾¶»ñÈ¡Í¼Æ¬
+	 * æ ¹æ®å›¾ç‰‡çš„ç›¸å¯¹è·¯å¾„è·å–å›¾ç‰‡
 	 * 
 	 * @param imagePath
-	 * @return Í¼Æ¬
+	 * @return å›¾ç‰‡
 	 */
 	public static Image getImage(String imagePath) {
 		URL url = GameUtil.class.getClassLoader().getResource(imagePath);
@@ -28,22 +25,22 @@ public class GameUtil {
 		return img;
 	}
 	/**
-	 * °´Ö¸¶¨½Ç¶ÈĞı×ªÍ¼Æ¬
+	 * æŒ‰æŒ‡å®šè§’åº¦æ—‹è½¬å›¾ç‰‡
 	 * @param bufferedimage
 	 * @param degree
-	 * @return Í¼Æ¬
+	 * @return å›¾ç‰‡
 	 */
 	public static Image rotateImage(final BufferedImage bufferedimage, final int degree) {
-		int w = bufferedimage.getWidth();// µÃµ½Í¼Æ¬¿í¶È¡£
-		int h = bufferedimage.getHeight();// µÃµ½Í¼Æ¬¸ß¶È¡£
-		int type = bufferedimage.getColorModel().getTransparency();// µÃµ½Í¼Æ¬Í¸Ã÷¶È¡£
-		BufferedImage img;// ¿ÕµÄÍ¼Æ¬¡£
-		Graphics2D graphics2d;// ¿ÕµÄ»­±Ê¡£
+		int w = bufferedimage.getWidth();// å¾—åˆ°å›¾ç‰‡å®½åº¦ã€‚
+		int h = bufferedimage.getHeight();// å¾—åˆ°å›¾ç‰‡é«˜åº¦ã€‚
+		int type = bufferedimage.getColorModel().getTransparency();// å¾—åˆ°å›¾ç‰‡é€æ˜åº¦ã€‚
+		BufferedImage img;// ç©ºçš„å›¾ç‰‡ã€‚
+		Graphics2D graphics2d;// ç©ºçš„ç”»ç¬”ã€‚
 		(graphics2d = (img = new BufferedImage(w, h, type)).createGraphics())
 				.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		graphics2d.rotate(Math.toRadians(degree), w / 2, h / 2);// Ğı×ª£¬degreeÊÇÕûĞÍ£¬¶ÈÊı£¬±ÈÈç´¹Ö±90¶È¡£
-		graphics2d.drawImage(bufferedimage, 0, 0, null);// ´ÓbufferedimagecopyÍ¼Æ¬ÖÁimg£¬0,0ÊÇimgµÄ×ø±ê¡£
+		graphics2d.rotate(Math.toRadians(degree), w / 2, h / 2);// æ—‹è½¬ï¼Œdegreeæ˜¯æ•´å‹ï¼Œåº¦æ•°ï¼Œæ¯”å¦‚å‚ç›´90åº¦ã€‚
+		graphics2d.drawImage(bufferedimage, 0, 0, null);// ä»bufferedimagecopyå›¾ç‰‡è‡³imgï¼Œ0,0æ˜¯imgçš„åæ ‡ã€‚
 		graphics2d.dispose();
-		return img;// ·µ»Ø¸´ÖÆºÃµÄÍ¼Æ¬£¬Ô­Í¼Æ¬ÒÀÈ»Ã»ÓĞ±ä£¬Ã»ÓĞĞı×ª£¬ÏÂ´Î»¹¿ÉÒÔÊ¹ÓÃ¡£
+		return img;// è¿”å›å¤åˆ¶å¥½çš„å›¾ç‰‡ï¼ŒåŸå›¾ç‰‡ä¾ç„¶æ²¡æœ‰å˜ï¼Œæ²¡æœ‰æ—‹è½¬ï¼Œä¸‹æ¬¡è¿˜å¯ä»¥ä½¿ç”¨ã€‚
 	}
 }

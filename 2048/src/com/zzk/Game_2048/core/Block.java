@@ -1,13 +1,8 @@
 package com.zzk.Game_2048.core;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Label;
-import java.awt.Rectangle;
-
 import com.zzk.Game_2048.constant.Constant;
+
+import java.awt.*;
 
 public class Block implements Drawable, Moveable {
 
@@ -17,11 +12,11 @@ public class Block implements Drawable, Moveable {
 	public static final int DIRECTION_LEFT = 2;
 	public static final int DIRECTION_RIGHT = -2;
 	
-	public int direction = DIRECTION_NONE;// Ä¬ÈÏ¾²Ö¹
+	public int direction = DIRECTION_NONE;// é»˜è®¤é™æ­¢
 	private String value;
-	public int xOrder;// ·½¿é×ø±ê£¨·ÇÏñËØ×ø±ê£©
-	public int yOrder;// ·½¿é×ø±ê
-	public int x;// ÏñËØ×ø±ê
+	public int xOrder;// æ–¹å—åæ ‡ï¼ˆéåƒç´ åæ ‡ï¼‰
+	public int yOrder;// æ–¹å—åæ ‡
+	public int x;// åƒç´ åæ ‡
 	public int y;//
 	public static final int SPEED = 5;
 	int level;
@@ -76,53 +71,53 @@ public class Block implements Drawable, Moveable {
 			break;
 		case STATE_MOVING:
 		case STATE_FREE:
-			move();// ÒÆ¶¯
+			move();// ç§»åŠ¨
 			break;
 		}
-		// »­ÄÚÈİ
+		// ç”»å†…å®¹
 		drawContent(g);
 	}
 
 	/**
-	 * »­ÄÚÈİ
+	 * ç”»å†…å®¹
 	 * 
 	 * @param g
 	 */
 	public void drawContent(Graphics g) {
 		this.value = (int) Math.pow(2, level) + "";
 		g.setColor(Constant.COLOR_BLOCKS_ACTIVE[level - 1]);
-		Font f = new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 60 - 5 * value.length());
+		Font f = new Font("å¾®è½¯é›…é»‘", Font.BOLD, 60 - 5 * value.length());
 		g.setFont(f);
 		FontMetrics fm = new Label().getFontMetrics(f);
 		int xValueStart = x + (Constant.BLOCK_WIDTH - fm.stringWidth(value)) / 2;
 		int yValueStart = y+Constant.BLOCK_HEIGHT- (Constant.BLOCK_HEIGHT - fm.getHeight()) / 2-fm.getDescent();
 
-		// »­±³¾°
+		// ç”»èƒŒæ™¯
 		g.fillRoundRect(x, y, Constant.BLOCK_WIDTH, Constant.BLOCK_WIDTH, 10, 10);
 		g.setColor(Color.BLACK);
-		// »­Êı×Ö
+		// ç”»æ•°å­—
 		g.drawString(value, xValueStart, yValueStart);
 
-//		 //²âÊÔ¼ÇÂ¼
-//		 f = new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 20);
+//		 //æµ‹è¯•è®°å½•
+//		 f = new Font("å¾®è½¯é›…é»‘", Font.BOLD, 20);
 //		 g.setFont(f);
 //		 String s = "(" + x + "," + y + ")" + moveCount;
 //		 g.drawString(s, x, y + 20);
 	}
 
 	/**
-	 * ÒÆ¶¯
+	 * ç§»åŠ¨
 	 */
 	int moveCount = 0;
-	// ÒÆ¶¯´ÎÊı×î´óÖµ
+	// ç§»åŠ¨æ¬¡æ•°æœ€å¤§å€¼
 	public static final int MOVE_COUNT_MAX = (Constant.BLOCK_WIDTH + Constant.BLOCK_SPACE) / SPEED;
 
 	/**
-	 * ÒÆ¶¯
+	 * ç§»åŠ¨
 	 */
 	@Override
 	public void move() {
-		// 0µ½MOVE_COUNT_MAX
+		// 0åˆ°MOVE_COUNT_MAX
 		switch (direction) {
 		case DIRECTION_UP:
 			y -= SPEED;
@@ -141,16 +136,16 @@ public class Block implements Drawable, Moveable {
 		if (moveCount >= MOVE_COUNT_MAX) {
 			moveCount = 0;
 		}
-		// 1µ½MOVE_COUNT_MAX
+		// 1åˆ°MOVE_COUNT_MAX
 	}
 	public int state=STATE_UNKOWN;
-	public static final int STATE_UNKOWN = 0;// Î´ÖªÌ¬£¨ÅĞ¶ÏÌ¬£©
-	public static final int STATE_MOVING = 1;// ÒÆ¶¯Ì¬
-	public static final int STATE_FREE = 2;// ×ÔÓÉÌ¬
-	public static final int STATE_MERGE = 3;// ºÏ²¢Ì¬
+	public static final int STATE_UNKOWN = 0;// æœªçŸ¥æ€ï¼ˆåˆ¤æ–­æ€ï¼‰
+	public static final int STATE_MOVING = 1;// ç§»åŠ¨æ€
+	public static final int STATE_FREE = 2;// è‡ªç”±æ€
+	public static final int STATE_MERGE = 3;// åˆå¹¶æ€
 
 	/**
-	 * »ñµÃ×´Ì¬
+	 * è·å¾—çŠ¶æ€
 	 * @return
 	 */
 	public int updateState() {
@@ -163,7 +158,7 @@ public class Block implements Drawable, Moveable {
 			state = STATE_FREE;
 		}
 		Block b = (Block) getNextBlock();
-		//ºÏ²¢Ì¬ÅĞ¶Ï
+		//åˆå¹¶æ€åˆ¤æ–­
 		if (direction != DIRECTION_NONE && b != null && b.level == level && (b.state != STATE_FREE)) {
 			this.live = false;
 			b.level++;
@@ -184,17 +179,17 @@ public class Block implements Drawable, Moveable {
 		return state;
 	}
 	/**
-	 * ¸üĞÂorder
+	 * æ›´æ–°order
 	 * 
 	 * @throws CloneNotSupportedException
 	 */
 	public void updateOrder() {
-		if (moveCount == 0) {// ÅĞ¶ÏÌ¬
+		if (moveCount == 0) {// åˆ¤æ–­æ€
 			xOrder = (x - Constant.BACK_LEFT_IN_X) / (Constant.BLOCK_WIDTH + Constant.BLOCK_SPACE) + 1;
 			yOrder = (y - Constant.BACK_UP_IN_Y) / (Constant.BLOCK_HEIGHT + Constant.BLOCK_SPACE) + 1;
 			loader.blocks[xOrder][yOrder] = this;
 			if (direction != 0 && getLastBlock() != null && getLastBlock().live && (getLastBlock() == this))
-				setLastBlock(null);// ÉèÖÃÀúÊ·¹ì¼£Îª¿Õ
+				setLastBlock(null);// è®¾ç½®å†å²è½¨è¿¹ä¸ºç©º
 		}
 	}
 
@@ -213,7 +208,7 @@ public class Block implements Drawable, Moveable {
 		loader.blocks[xOrder][yOrder]=block;
 	}
 	/**
-	 * ·µ»Øblock¶ÔÓ¦µÄ¾ØĞÎ
+	 * è¿”å›blockå¯¹åº”çš„çŸ©å½¢
 	 * 
 	 * @return
 	 */
@@ -222,7 +217,7 @@ public class Block implements Drawable, Moveable {
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÔÚ±ß½ç
+	 * åˆ¤æ–­æ˜¯å¦åœ¨è¾¹ç•Œ
 	 * 
 	 * @return
 	 */
@@ -237,7 +232,7 @@ public class Block implements Drawable, Moveable {
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÔÚ½ÇÂä
+	 * åˆ¤æ–­æ˜¯å¦åœ¨è§’è½
 	 * 
 	 * @return
 	 */
@@ -249,7 +244,7 @@ public class Block implements Drawable, Moveable {
 	}
 
 	/**
-	 * ´¦Àí³ö½çÎÊÌâ
+	 * å¤„ç†å‡ºç•Œé—®é¢˜
 	 */
 	public void outOfBounds() {
 		if (x > (Constant.BACK_RIGHT_IN_X - Constant.BLOCK_WIDTH)) {
@@ -271,22 +266,22 @@ public class Block implements Drawable, Moveable {
 		String s = "value=" + value + " (" + xOrder + "," + yOrder + "),Direction=";
 		switch (direction) {
 		case DIRECTION_UP:
-			s += "¡ü";
+			s += "â†‘";
 			break;
 		case DIRECTION_DOWN:
-			s += "¡ı";
+			s += "â†“";
 			break;
 		case DIRECTION_LEFT:
-			s += "¡û";
+			s += "â†";
 			break;
 		case DIRECTION_RIGHT:
-			s += "¡ú";
+			s += "â†’";
 			break;
 		case DIRECTION_NONE:
 			s += "0";
 			break;
 		default:
-			s += "·½ÏòÒì³£";
+			s += "æ–¹å‘å¼‚å¸¸";
 			break;
 		}
 		if (getNextBlock() == null)

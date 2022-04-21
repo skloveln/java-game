@@ -2,14 +2,14 @@ package com.zzk;
 
 import java.util.HashMap;
 /**
- * ³éÏóµÄÓï·¨·ÖÎöµü´úÆ÷
+ * æŠ½è±¡çš„è¯­æ³•åˆ†æè¿­ä»£å™¨
  * @author zzk
  */
 public abstract class AbstractGrammar {
-	private char start;// ÆğÊ¼·û
-	private char[] end;// ÖÕ½á·û¼¯ºÏ
-	private char[] notEnd;// ·ÇÖÕ½á·û¼¯ºÏ
-	private HashMap<String, String[]> productMap;// ²úÉúÊ½¹æÔò
+	private char start;// èµ·å§‹ç¬¦
+	private char[] end;// ç»ˆç»“ç¬¦é›†åˆ
+	private char[] notEnd;// éç»ˆç»“ç¬¦é›†åˆ
+	private HashMap<String, String[]> productMap;// äº§ç”Ÿå¼è§„åˆ™
 	
 	public AbstractGrammar() {
 		super();
@@ -46,12 +46,12 @@ public abstract class AbstractGrammar {
 		this.productMap = productMap;
 	}
 	/**
-	 * ²ÎÊıÊÇ·ñºÏ·¨
+	 * å‚æ•°æ˜¯å¦åˆæ³•
 	 * @return
 	 */
 	public abstract boolean isLegal();
 	/**
-	 * Éú³Éµü´ún´ÎÖ®ºóµÄÊ½×Ó
+	 * ç”Ÿæˆè¿­ä»£næ¬¡ä¹‹åçš„å¼å­
 	 */
 	public abstract String product(int n);
 }

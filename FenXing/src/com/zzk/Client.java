@@ -1,54 +1,40 @@
 package com.zzk;
 
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Label;
-import java.awt.Panel;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.HashMap;
-
-import javax.swing.JComboBox;
-
 import com.zzk.grammar.RandomKVGrammar;
 import com.zzk.grammar.SingleKVGrammar;
 import com.zzk.interpreter.GrammarInterpreterAB;
 import com.zzk.interpreter.GrammarInterpreterF;
 import com.zzk.util.DrawUtil;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.HashMap;
+
 /**
- * ¿Í»§¶Ë£¬»æÖÆ·ÖĞÎÊ÷
+ * å®¢æˆ·ç«¯ï¼Œç»˜åˆ¶åˆ†å½¢æ ‘
  * @author zzk
  */
 public class Client extends Frame {
 	/**
-	 * ĞòÁĞºÅ
+	 * åºåˆ—å·
 	 */
-	private static final int FRAME_WIDTH = 1000;// ´°¿Ú¿í¶È
-	private static final int FRAME_HEIGHT = 1000;// ´°¿Ú¸ß¶È
+	private static final int FRAME_WIDTH = 1000;// çª—å£å®½åº¦
+	private static final int FRAME_HEIGHT = 1000;// çª—å£é«˜åº¦
 	private static final long serialVersionUID = -1503870997066468394L;
-	private String grammarString;// ÎÄ·¨×Ö·û´®
-	private AbstractGrammar grammar;// Óï·¨·ÖÎöÆ÷
-	private Point startPoint = new Point(500, 900);// ÆğÊ¼Î»ÖÃ
-	private double startAngle = 90;// ÆğÊ¼½Ç¶È
-	private double rotateAngle = 30;// Ğı×ª½Ç
-	private int length = 5;// Ïß¶Î³¤¶È
-	private int n = 5;// µü´ú´ÎÊı
-	private AbstractGrammarInterpreter interpreter = null;// ½âÊÍÆ÷
+	private String grammarString;// æ–‡æ³•å­—ç¬¦ä¸²
+	private AbstractGrammar grammar;// è¯­æ³•åˆ†æå™¨
+	private Point startPoint = new Point(500, 900);// èµ·å§‹ä½ç½®
+	private double startAngle = 90;// èµ·å§‹è§’åº¦
+	private double rotateAngle = 30;// æ—‹è½¬è§’
+	private int length = 5;// çº¿æ®µé•¿åº¦
+	private int n = 5;// è¿­ä»£æ¬¡æ•°
+	private AbstractGrammarInterpreter interpreter = null;// è§£é‡Šå™¨
 	{
 		interpreter = new GrammarInterpreterF(length, grammarString, startPoint, startAngle, rotateAngle);
 	}
 	/**
-	 * ·ÖĞÎÊ÷AB
+	 * åˆ†å½¢æ ‘AB
 	 */
 	public void initTreeAB() {
 		char start = 'B';
@@ -59,18 +45,18 @@ public class Client extends Frame {
 		HashMap<String, String[]> map = new HashMap<>();
 		map.put("A", productA);
 		map.put("B", productB);
-		grammar = new SingleKVGrammar(start, end, notEnd, map);//Ê¹ÓÃSingleKVÓï·¨·ÖÎö
+		grammar = new SingleKVGrammar(start, end, notEnd, map);//ä½¿ç”¨SingleKVè¯­æ³•åˆ†æ
 		grammarString = grammar.product(n);
 	}
 
 	/**
-	 * Ëæ»ú·ÖĞÎÊ÷
+	 * éšæœºåˆ†å½¢æ ‘
 	 */
 	public void initRandomTree() {
 		char start = 'F';
 		char[] notEnd = { 'F' };
 		char[] end = { '+', '-', '[', ']' };
-		String[] product = { "F-F++F-F", "F[+F]F[-F[+F]]", "FF+[+F+F]-[+F]", "F[+F][-F]", "F" };// Ê÷
+		String[] product = { "F-F++F-F", "F[+F]F[-F[+F]]", "FF+[+F+F]-[+F]", "F[+F][-F]", "F" };// æ ‘
 
 		HashMap<String, String[]> map = new HashMap<>();
 		map.put("F", product);
@@ -79,13 +65,13 @@ public class Client extends Frame {
 	}
 
 	/**
-	 * µ¹ËÉÊ÷ĞÎ×´
+	 * å€’æ¾æ ‘å½¢çŠ¶
 	 */
 	public void initPine() {
 		char start = 'F';
 		char[] notEnd = { 'F' };
 		char[] end = { '+', '-', '[', ']' };
-		String[] product = { "F[+F]F[-F[+F]]" };// Ààµ¹ËÉÊ÷
+		String[] product = { "F[+F]F[-F[+F]]" };// ç±»å€’æ¾æ ‘
 		HashMap<String, String[]> map = new HashMap<>();
 		map.put("F", product);
 		grammar = new RandomKVGrammar(start, end, notEnd, map);
@@ -93,13 +79,13 @@ public class Client extends Frame {
 	}
 
 	/**
-	 * Ñ©»¨ĞÎ×´
+	 * é›ªèŠ±å½¢çŠ¶
 	 */
 	public void initSnowflake() {
 		char start = 'F';
 		char[] notEnd = { 'F' };
 		char[] end = { '+', '-', '[', ']' };
-		String[] product = { "F-F++F-F" };// Ñ©»¨
+		String[] product = { "F-F++F-F" };// é›ªèŠ±
 		HashMap<String, String[]> map = new HashMap<>();
 		map.put("F", product);
 		grammar = new RandomKVGrammar(start, end, notEnd, map);
@@ -107,13 +93,13 @@ public class Client extends Frame {
 	}
 
 	/**
-	 * »æÖÆ¶Ô³Æ·ÖĞÎÊ÷£¬Ê¹ÓÃÊ±ÉèÖÃlengthÎª100£¬×Ô¶¯¿ªÆôlength×Ô¼õ¿ª¹Ø
+	 * ç»˜åˆ¶å¯¹ç§°åˆ†å½¢æ ‘ï¼Œä½¿ç”¨æ—¶è®¾ç½®lengthä¸º100ï¼Œè‡ªåŠ¨å¼€å¯lengthè‡ªå‡å¼€å…³
 	 */
 	public void initSymmetricalTree() {
 		char start = 'F';
 		char[] notEnd = { 'F' };
 		char[] end = { '+', '-', '[', ']' };
-		String[] product = { "F[+F][-F]" };// ¶Ô³Æ·ÖĞÎÊ÷£¬Ê¹ÓÃÊ±ÉèÖÃlengthÎª100
+		String[] product = { "F[+F][-F]" };// å¯¹ç§°åˆ†å½¢æ ‘ï¼Œä½¿ç”¨æ—¶è®¾ç½®lengthä¸º100
 		HashMap<String, String[]> map = new HashMap<>();
 		map.put("F", product);
 		grammar = new RandomKVGrammar(start, end, notEnd, map);
@@ -122,12 +108,12 @@ public class Client extends Frame {
 
 	public void loadFrame() {
 		initRandomTree();
-		this.setTitle("·ÖĞÎ");
+		this.setTitle("åˆ†å½¢");
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setBackground(Color.WHITE);
-		this.setLocationRelativeTo(null);// ¾ÓÖĞ
+		this.setLocationRelativeTo(null);// å±…ä¸­
 		this.setResizable(false);
-		this.setFont(new Font("Ó×Ô²", Font.BOLD, 20));
+		this.setFont(new Font("å¹¼åœ†", Font.BOLD, 20));
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -135,15 +121,15 @@ public class Client extends Frame {
 			}
 		});
 		this.setLayout(null);
-		this.initComponent();// ³õÊ¼»¯×é¼ş
+		this.initComponent();// åˆå§‹åŒ–ç»„ä»¶
 		this.setVisible(true);
 	}
 
-	// ³õÊ¼»¯×é¼ş
+	// åˆå§‹åŒ–ç»„ä»¶
 	public void initComponent() {
-		Panel pNorth = new Panel(new FlowLayout());// °´Å¥ÇøÓòÃæ°å
+		Panel pNorth = new Panel(new FlowLayout());// æŒ‰é’®åŒºåŸŸé¢æ¿
 		pNorth.setBounds(100, 50, 800, 50);
-		Button btnRandomTree = new Button("Ëæ»ú·ÖĞÎÊ÷");
+		Button btnRandomTree = new Button("éšæœºåˆ†å½¢æ ‘");
 		btnRandomTree.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -157,7 +143,7 @@ public class Client extends Frame {
 				repaint();
 			}
 		});
-		Button btnSymmetricalTree = new Button("¶Ô³Æ·ÖĞÎÊ÷");
+		Button btnSymmetricalTree = new Button("å¯¹ç§°åˆ†å½¢æ ‘");
 		btnSymmetricalTree.addActionListener(new ActionListener() {
 
 			@Override
@@ -172,7 +158,7 @@ public class Client extends Frame {
 				repaint();
 			}
 		});
-		Button btnSnowflake = new Button("Ñ©»¨");
+		Button btnSnowflake = new Button("é›ªèŠ±");
 		btnSnowflake.addActionListener(new ActionListener() {
 
 			@Override
@@ -187,7 +173,7 @@ public class Client extends Frame {
 				repaint();
 			}
 		});
-		Button btnSpecialTree = new Button("ABÊ÷");
+		Button btnSpecialTree = new Button("ABæ ‘");
 		btnSpecialTree.addActionListener(new ActionListener() {
 
 			@Override
@@ -202,7 +188,7 @@ public class Client extends Frame {
 				repaint();
 			}
 		});
-		Label label = new Label("µü´ú´ÎÊı");
+		Label label = new Label("è¿­ä»£æ¬¡æ•°");
 		Integer[] ints = { 1, 2, 3, 4, 5, 6, 7, 8 };
 		JComboBox<Integer> box = new JComboBox<>(ints);
 		box.setSelectedItem(n);
@@ -222,9 +208,9 @@ public class Client extends Frame {
 		pNorth.add(btnSymmetricalTree);
 		pNorth.add(btnSpecialTree);
 		this.add(pNorth);
-		//ÑÕÉ«¿é
+		//é¢œè‰²å—
 		Panel pMiddle = new Panel();
-		Label labelColor = new Label("ÏßÌõÑÕÉ«");
+		Label labelColor = new Label("çº¿æ¡é¢œè‰²");
 		pMiddle.setBounds(100, 100, 800, 50);
 		Button btnRed = new Button("  ");
 		Button btnGreen = new Button("  ");

@@ -1,20 +1,18 @@
 package com.zzk.teris.core;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.event.KeyEvent;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.zzk.teris.client.TerisClient;
 import com.zzk.teris.constant.Constant;
 import com.zzk.teris.core.blocks.Block4;
 import com.zzk.teris.core.state.ActiveState;
 import com.zzk.teris.core.state.StopState;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
- * ¿éÀà
+ * å—ç±»
  * 
  * @author zzk
  */
@@ -22,22 +20,22 @@ public abstract class AbstractBlock implements Drawable {
 	private static enum Direction{
 		LEFT,RIGHT,DOWN,NORMAL,ROTATE;
 	}
-	private List<Square> squareList = new LinkedList<>();// »ù±¾·½¿é×é³É±í
-	private int x, y;// ×ø±ê
-	private Direction direction;// ¿éµÄ·½Ïò×´Ì¬
-	private AbstractBlockState state;// ¿éµÄÔË¶¯×´Ì¬
-	private int downSpeed = 1;// ÏÂ½µµÄËÙ¶È
-	private Point center;// ¿éÖĞĞÄµãÎ»ÖÃ
-	private Color color;// ¿éÑÕÉ«
-	private int count = 1;// Ğı×ªÁÙÊ±±äÁ¿
-	private int minX;// ¿é×ó±ß½ç
-	private int minY;// ¿éÉÏ±ß½ç
-	private int maxX;// ¿éÓÒ±ß½ç
-	private int maxY;// ¿éÏÂ±ß½ç
+	private List<Square> squareList = new LinkedList<>();// åŸºæœ¬æ–¹å—ç»„æˆè¡¨
+	private int x, y;// åæ ‡
+	private Direction direction;// å—çš„æ–¹å‘çŠ¶æ€
+	private AbstractBlockState state;// å—çš„è¿åŠ¨çŠ¶æ€
+	private int downSpeed = 1;// ä¸‹é™çš„é€Ÿåº¦
+	private Point center;// å—ä¸­å¿ƒç‚¹ä½ç½®
+	private Color color;// å—é¢œè‰²
+	private int count = 1;// æ—‹è½¬ä¸´æ—¶å˜é‡
+	private int minX;// å—å·¦è¾¹ç•Œ
+	private int minY;// å—ä¸Šè¾¹ç•Œ
+	private int maxX;// å—å³è¾¹ç•Œ
+	private int maxY;// å—ä¸‹è¾¹ç•Œ
 	{
 		MyFrame.sleepTime = 30;
-		direction = Direction.NORMAL;//³õÊ¼»¯·½Ïò
-		state = new ActiveState(this);// ³õÊ¼»¯Îª»îÔ¾Ì¬
+		direction = Direction.NORMAL;//åˆå§‹åŒ–æ–¹å‘
+		state = new ActiveState(this);// åˆå§‹åŒ–ä¸ºæ´»è·ƒæ€
 	}
 	public AbstractBlock(int x, int y, Color color) {
 		this.x = x;
@@ -85,7 +83,7 @@ public abstract class AbstractBlock implements Drawable {
 	}
 
 	/**
-	 * Ğı×ª¿é
+	 * æ—‹è½¬å—
 	 */
 	private void rotate() {
 		if (this instanceof Block4) {
@@ -109,18 +107,18 @@ public abstract class AbstractBlock implements Drawable {
 	}
 
 	/**
-	 * ´¦Àí×óÓÒ·½¿é¼äµÄÅö×²
+	 * å¤„ç†å·¦å³æ–¹å—é—´çš„ç¢°æ’
 	 */
 	private void handleCollision() {
 		for (Square square : squareList) {
 			switch (direction) {
-			case LEFT:// Èç¹û±¾¿éµÄ·½¿éµÄ×ó²âÓĞÆäËû·½¿é,ÔòÍ£Ö¹
+			case LEFT:// å¦‚æœæœ¬å—çš„æ–¹å—çš„å·¦æµ‹æœ‰å…¶ä»–æ–¹å—,åˆ™åœæ­¢
 				if (square.getCenterX() == minX && (TerisClient.getSquare(square, 0, -1) != null || TerisClient.getSquare(square, 1, -1) != null
 						|| TerisClient.getSquare(square, -1, -1) != null)) {
 					direction = Direction.NORMAL;
 				}
 				break;
-			case RIGHT:// Èç¹û±¾¿éµÄ·½¿éµÄÓÒ²âÓĞÆäËû·½¿é,ÔòÍ£Ö¹
+			case RIGHT:// å¦‚æœæœ¬å—çš„æ–¹å—çš„å³æµ‹æœ‰å…¶ä»–æ–¹å—,åˆ™åœæ­¢
 				if (square.getCenterX() == maxX && (TerisClient.getSquare(square, 0, 1) != null || TerisClient.getSquare(square, 1, 1) != null
 						|| TerisClient.getSquare(square, -1, 1) != null)) {
 					direction = Direction.NORMAL;
@@ -133,52 +131,52 @@ public abstract class AbstractBlock implements Drawable {
 	}
 
 	public void move() {
-		handleCollision();// ´¦Àí×óÓÒ·½¿éÅö×²ÎÊÌâ
-		switch (direction) {// ¸ù¾İ·½Ïò×´Ì¬´¦Àí
+		handleCollision();// å¤„ç†å·¦å³æ–¹å—ç¢°æ’é—®é¢˜
+		switch (direction) {// æ ¹æ®æ–¹å‘çŠ¶æ€å¤„ç†
 		case LEFT:
 			x -= (Constant.BLOCK_WIDTH + Constant.BLOCK_SPACE);
-			for (Square square : squareList) {// ±éÀúÃ¿¸öĞ¡¿éÊ¹Æä×óÒÆ
+			for (Square square : squareList) {// éå†æ¯ä¸ªå°å—ä½¿å…¶å·¦ç§»
 				square.x -= (Constant.BLOCK_WIDTH + Constant.BLOCK_SPACE);
 			}
 			break;
 		case RIGHT:
 			x += (Constant.BLOCK_WIDTH + Constant.BLOCK_SPACE);
-			for (Square square : squareList) {// ±éÀúÃ¿¸öĞ¡¿éÊ¹ÆäÓÒÒÆ
+			for (Square square : squareList) {// éå†æ¯ä¸ªå°å—ä½¿å…¶å³ç§»
 				square.x += (Constant.BLOCK_WIDTH + Constant.BLOCK_SPACE);
 			}
 			break;
 		case DOWN:
-			MyFrame.sleepTime /= 30;// ¼Ó¿ìÏÂÂäËÙ¶È
+			MyFrame.sleepTime /= 30;// åŠ å¿«ä¸‹è½é€Ÿåº¦
 			break;
 		case ROTATE:
-			rotate();// Ğı×ª
+			rotate();// æ—‹è½¬
 			break;
 		case NORMAL:
 			break;
 		}
-		direction = Direction.NORMAL;// »Ö¸´×´Ì¬
+		direction = Direction.NORMAL;// æ¢å¤çŠ¶æ€
 		y += downSpeed;
-		for (Square square : squareList) {// ×ÔÈ»ÏÂÒÆ
+		for (Square square : squareList) {// è‡ªç„¶ä¸‹ç§»
 			square.y += downSpeed;
 		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		updateCenter();// ¸üĞÂÖĞĞÄµã×ø±ê
-		state.saveSquares();// ±£´æsquare
-		state.draw(g);// ¸ù¾İ×´Ì¬»æÖÆ
+		updateCenter();// æ›´æ–°ä¸­å¿ƒç‚¹åæ ‡
+		state.saveSquares();// ä¿å­˜square
+		state.draw(g);// æ ¹æ®çŠ¶æ€ç»˜åˆ¶
 	}
 	/**
-	 * ´¦ÀíÏÂ±ß½ç
+	 * å¤„ç†ä¸‹è¾¹ç•Œ
 	 */
 	public void outOfBounds() {
 		if (maxY == (Constant.GAME_Y_DOWN - Constant.BLOCK_HEIGHT / 2 - Constant.BLOCK_SPACE)) {
-			state = new StopState(this);// Í£Ö¹
+			state = new StopState(this);// åœæ­¢
 		}
 	}
 	/**
-	 * ¸üĞÂÖĞĞÄµã×ø±ê
+	 * æ›´æ–°ä¸­å¿ƒç‚¹åæ ‡
 	 */
 	private void updateCenter() {
 		if (center == null)
@@ -200,12 +198,12 @@ public abstract class AbstractBlock implements Drawable {
 	}
 
 	/**
-	 * Ìî³äsquareList
+	 * å¡«å……squareList
 	 */
 	protected abstract void createSquareList();
 
 	/**
-	 * ¼üÅÌ°´ÏÂÊÂ¼ş
+	 * é”®ç›˜æŒ‰ä¸‹äº‹ä»¶
 	 * 
 	 * @param e
 	 */
@@ -221,7 +219,7 @@ public abstract class AbstractBlock implements Drawable {
 			break;
 		case KeyEvent.VK_LEFT:
 		case KeyEvent.VK_A:
-			if (x <= Constant.GAME_X_LEFT) {// ×ó±ß½ç
+			if (x <= Constant.GAME_X_LEFT) {// å·¦è¾¹ç•Œ
 				direction = Direction.NORMAL;
 			} else {
 				direction = Direction.LEFT;
@@ -229,7 +227,7 @@ public abstract class AbstractBlock implements Drawable {
 			break;
 		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_D:
-			if (maxX >= Constant.GAME_X_RIGHT - Constant.BLOCK_WIDTH / 2) {// ÓÒ±ß½ç
+			if (maxX >= Constant.GAME_X_RIGHT - Constant.BLOCK_WIDTH / 2) {// å³è¾¹ç•Œ
 				direction = Direction.NORMAL;
 			} else {
 				direction = Direction.RIGHT;

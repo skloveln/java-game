@@ -1,37 +1,34 @@
 package com.zzk.snake.core;
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Image;
+import com.zzk.snake.constant.Constant;
+
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import com.zzk.snake.constant.Constant;
-
 public class MyFrame extends Frame{
 	/**
-	 * ¼ÓÔØ´°Ìå
+	 * åŠ è½½çª—ä½“
 	 */
 	public void loadFrame(){
-		this.setTitle("Ì°³ÔÉß");//ÉèÖÃ´°Ìå±êÌâ
-		this.setSize(Constant.GAME_WIDTH, Constant.GAME_HEIGHT);//ÉèÖÃ´°Ìå´óĞ¡
-		this.setBackground(Color.BLACK);//ÉèÖÃ±³¾°
-		this.setLocationRelativeTo(null);//¾ÓÖĞ
-		//ÉèÖÃ¿É¹Ø±Õ
+		this.setTitle("è´ªåƒè›‡");//è®¾ç½®çª—ä½“æ ‡é¢˜
+		this.setSize(Constant.GAME_WIDTH, Constant.GAME_HEIGHT);//è®¾ç½®çª—ä½“å¤§å°
+		this.setBackground(Color.BLACK);//è®¾ç½®èƒŒæ™¯
+		this.setLocationRelativeTo(null);//å±…ä¸­
+		//è®¾ç½®å¯å…³é—­
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
 			}
 		});
-		//ÉèÖÃ¿É¼û
+		//è®¾ç½®å¯è§
 		this.setVisible(true);
-		//ÔËĞĞÖØ»æÏß³Ì
+		//è¿è¡Œé‡ç»˜çº¿ç¨‹
 		new MyThread().start();
 	}
 	/**
-	 * ·ÀÖ¹Í¼Æ¬ÉÁË¸£¬Ê¹ÓÃË«ÖØ»º´æ
+	 * é˜²æ­¢å›¾ç‰‡é—ªçƒï¼Œä½¿ç”¨åŒé‡ç¼“å­˜
 	 * 
 	 * @param g
 	 */
@@ -51,7 +48,7 @@ public class MyFrame extends Frame{
 		g.drawImage(backImg, 0, 0, null);
 	}
 	/**
-	 * ÕâÀï´´½¨Ò»¸ö²»¶ÏÖØ»æµÄÏß³ÌÄÚ²¿Àà
+	 * è¿™é‡Œåˆ›å»ºä¸€ä¸ªä¸æ–­é‡ç»˜çš„çº¿ç¨‹å†…éƒ¨ç±»
 	 * 
 	 * @param args
 	 */
@@ -61,7 +58,7 @@ public class MyFrame extends Frame{
 			while(true){
 				repaint();
 				try {
-					sleep(30);//Ã¿30ºÁÃëÖØ»æÒ»´Î
+					sleep(30);//æ¯30æ¯«ç§’é‡ç»˜ä¸€æ¬¡
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

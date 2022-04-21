@@ -1,19 +1,18 @@
 package com.zzk.teris.util;
 
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.imageio.ImageIO;
-
 public class GameUtil {
 
 	/**
-	 * ¸ù¾İÍ¼Æ¬µÄÏà¶ÔÂ·¾¶»ñÈ¡Í¼Æ¬
+	 * æ ¹æ®å›¾ç‰‡çš„ç›¸å¯¹è·¯å¾„è·å–å›¾ç‰‡
 	 * 
 	 * @param imagePath
-	 * @return Í¼Æ¬
+	 * @return å›¾ç‰‡
 	 */
 	public static Image getImage(String imagePath) {
 		URL url = GameUtil.class.getClassLoader().getResource(imagePath);

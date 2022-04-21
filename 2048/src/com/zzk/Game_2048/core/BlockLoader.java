@@ -1,15 +1,13 @@
 package com.zzk.Game_2048.core;
 
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Point;
+import com.zzk.Game_2048.client.Client;
+import com.zzk.Game_2048.constant.Constant;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import com.zzk.Game_2048.client.Client;
-import com.zzk.Game_2048.constant.Constant;
 
 
 public class BlockLoader implements Drawable {
@@ -64,7 +62,7 @@ public class BlockLoader implements Drawable {
 			blockList.add(newBlock);
 			System.out.println("newBlock:" + newBlock);
 		} else {
-			Client.gameStart = false;// ÓÎÏ·½áÊø
+			Client.gameStart = false;// æ¸¸æˆç»“æŸ
 		}
 	}
 
@@ -116,7 +114,7 @@ public class BlockLoader implements Drawable {
 		for (Block block : blockList) {
 			if (block.live) {
 				block.draw(g);
-				g.setFont(new Font("Î¢ÈíÒ¹ºÚ", Font.BOLD, 20));
+				g.setFont(new Font("å¾®è½¯å¤œé»‘", Font.BOLD, 20));
 				if (block.state != Block.STATE_UNKOWN) {
 					newFlag = false;
 				}
@@ -128,11 +126,11 @@ public class BlockLoader implements Drawable {
 			newBlock();
 			isPressed = false;
 		}
-//		 drawTestInfo(g);//²âÊÔĞÅÏ¢
+//		 drawTestInfo(g);//æµ‹è¯•ä¿¡æ¯
 	}
 
 	public void drawTestInfo(Graphics g) {
-		// ²âÊÔ
+		// æµ‹è¯•
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 6; j++) {
 				int x = Constant.BACK_Y + Constant.BLOCK_SPACE * i + Constant.BLOCK_WIDTH * (i - 1);

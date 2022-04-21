@@ -1,27 +1,26 @@
 package com.zzk.snake.core;
 
-import java.awt.Graphics;
-import java.awt.Point;
+import com.zzk.snake.constant.Constant;
+import com.zzk.snake.util.GameUtil;
+import com.zzk.snake.util.ImageUtil;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.zzk.snake.constant.Constant;
-import com.zzk.snake.util.GameUtil;
-import com.zzk.snake.util.ImageUtil;
-
 public class MySnake extends SnakeObject implements Moveable {
-	//ÉßÍ·Í¼Æ¬£¨Î´Ğı×ª£©
+	//è›‡å¤´å›¾ç‰‡ï¼ˆæœªæ—‹è½¬ï¼‰
 	private static final BufferedImage IMG_SNAKE_HEAD = (BufferedImage) ImageUtil.images.get("snake_head");
 
-	private int speed;//ÒÆ¶¯ËÙ¶È
-	private int length;//³¤¶È
+	private int speed;//ç§»åŠ¨é€Ÿåº¦
+	private int length;//é•¿åº¦
 	private int num;//
 	public static List<Point> bodyPoints = new LinkedList<>();
-	public int score = 0;//·ÖÊı
-	private static BufferedImage newImgSnakeHead;//Ğı×ªºóµÄÉßÍ·Í¼Æ¬
-	boolean up, down, left, right = true;//³õÊ¼Ì¬ÏòÓÒ
+	public int score = 0;//åˆ†æ•°
+	private static BufferedImage newImgSnakeHead;//æ—‹è½¬åçš„è›‡å¤´å›¾ç‰‡
+	boolean up, down, left, right = true;//åˆå§‹æ€å‘å³
 	public MySnake(int x, int y) {
 		this.live = true;
 		this.x = x;
@@ -42,18 +41,18 @@ public class MySnake extends SnakeObject implements Moveable {
 		this.length=length;
 	}
 	/**
-	 * ½ÓÊÕ¼üÅÌ°´ÏÂÊÂ¼ş
+	 * æ¥æ”¶é”®ç›˜æŒ‰ä¸‹äº‹ä»¶
 	 * @param e
 	 */
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			if (!down) {// ²»ÄÜÏò³õÊ¼·½ÏòµÄ·´·½ÏòÒÆ¶¯
+			if (!down) {// ä¸èƒ½å‘åˆå§‹æ–¹å‘çš„åæ–¹å‘ç§»åŠ¨
 				up = true;
 				down = false;
 				left = false;
 				right = false;
-				newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, -90);//Ğı×ªÍ¼Æ¬
+				newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, -90);//æ—‹è½¬å›¾ç‰‡
 			}
 			break;
 		case KeyEvent.VK_DOWN:
@@ -86,7 +85,7 @@ public class MySnake extends SnakeObject implements Moveable {
 		}
 	}
 	/**
-	 * ÒÆ¶¯
+	 * ç§»åŠ¨
 	 */
 	@Override
 	public void move() {
@@ -100,46 +99,46 @@ public class MySnake extends SnakeObject implements Moveable {
 			x += speed;
 	}
 	/**
-	 * »æÖÆ
+	 * ç»˜åˆ¶
 	 */
 	@Override
 	public void draw(Graphics g) {
-		outOfBounds();//´¦Àí³ö½çÎÊÌâ
-		eatBody();//´¦ÀíÊÇ·ñ³Ôµ½ÉíÌåÎÊÌâ
-		bodyPoints.add(new Point(x, y));//±£´æ¹ì¼£
-		if (bodyPoints.size() == (this.length+1) * num) {//µ±±£´æµÄ¹ì¼£µãµÄ¸öÊıÎªÉßµÄ³¤¶È+1µÄnum±¶Ê±
-			bodyPoints.remove(0);//ÒÆ³ıµÚÒ»¸ö
+		outOfBounds();//å¤„ç†å‡ºç•Œé—®é¢˜
+		eatBody();//å¤„ç†æ˜¯å¦åƒåˆ°èº«ä½“é—®é¢˜
+		bodyPoints.add(new Point(x, y));//ä¿å­˜è½¨è¿¹
+		if (bodyPoints.size() == (this.length+1) * num) {//å½“ä¿å­˜çš„è½¨è¿¹ç‚¹çš„ä¸ªæ•°ä¸ºè›‡çš„é•¿åº¦+1çš„numå€æ—¶
+			bodyPoints.remove(0);//ç§»é™¤ç¬¬ä¸€ä¸ª
 		}
-		g.drawImage(newImgSnakeHead, x, y, null);//»æÖÆÉßÍ·
-		drawBody(g);//»æÖÆÉßÉí
-		move();//ÒÆ¶¯
+		g.drawImage(newImgSnakeHead, x, y, null);//ç»˜åˆ¶è›‡å¤´
+		drawBody(g);//ç»˜åˆ¶è›‡èº«
+		move();//ç§»åŠ¨
 	}
 	/**
-	 * ´¦ÀíÊÇ·ñ³Ôµ½µ½ÉíÌåÎÊÌâ
+	 * å¤„ç†æ˜¯å¦åƒåˆ°åˆ°èº«ä½“é—®é¢˜
 	 */
 	public void eatBody(){
 		for (Point point : bodyPoints) {
 			for (Point point2 : bodyPoints) {
 				if(point.equals(point2)&&point!=point2){
-					this.live=false;//Ê³ÎïËÀÍö
+					this.live=false;//é£Ÿç‰©æ­»äº¡
 				}
 			}
 		}
 	}
 	/**
-	 * »æÖÆÉßÉí
+	 * ç»˜åˆ¶è›‡èº«
 	 * @param g
 	 */
 	public void drawBody(Graphics g) {
-		int length = bodyPoints.size() - 1-num;//Ç°num¸ö´æ´¢µÄÊÇÉßÍ·µÄµ±Ç°¹ì¼£×ø±ê
-		for (int i = length; i >= num; i -= num) {//´ÓÎ²²¿Ìí¼Ó
+		int length = bodyPoints.size() - 1-num;//å‰numä¸ªå­˜å‚¨çš„æ˜¯è›‡å¤´çš„å½“å‰è½¨è¿¹åæ ‡
+		for (int i = length; i >= num; i -= num) {//ä»å°¾éƒ¨æ·»åŠ 
 			Point p = bodyPoints.get(i);
 			g.drawImage(img, p.x, p.y, null);
 		}
 	}
 
 	/**
-	 * ´¦Àí³ö½çÎÊÌâ
+	 * å¤„ç†å‡ºç•Œé—®é¢˜
 	 */
 	private void outOfBounds() {
 		boolean xOut = (x <= 0 || x >= (Constant.GAME_WIDTH - width));

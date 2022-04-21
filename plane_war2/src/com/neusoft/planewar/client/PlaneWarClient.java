@@ -1,26 +1,16 @@
 package com.neusoft.planewar.client;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
+import com.neusoft.planewar.constant.Constant;
+import com.neusoft.planewar.core.*;
+import com.neusoft.planewar.util.ImageUtil;
+import com.neusoft.planewar.util.MusicUtil;
+
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import com.neusoft.planewar.constant.Constant;
-import com.neusoft.planewar.core.Background;
-import com.neusoft.planewar.core.EnemyPlane;
-import com.neusoft.planewar.core.Explode;
-import com.neusoft.planewar.core.Item;
-import com.neusoft.planewar.core.Missile;
-import com.neusoft.planewar.core.MyFrame;
-import com.neusoft.planewar.core.Plane;
-import com.neusoft.planewar.util.ImageUtil;
-import com.neusoft.planewar.util.MusicUtil;
 
 public class PlaneWarClient extends MyFrame {
 	Point center = new Point((Constant.GAME_WIDTH) / 2, (Constant.GAME_HEIGHT) / 2);
@@ -38,7 +28,7 @@ public class PlaneWarClient extends MyFrame {
 	@Override
 	public void launchFrame() {
 		super.launchFrame();
-		// Ìí¼Ó¼üÅÌ¼àÌıÆ÷
+		// æ·»åŠ é”®ç›˜ç›‘å¬å™¨
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

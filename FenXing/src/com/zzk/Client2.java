@@ -1,58 +1,44 @@
 package com.zzk;
 
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Label;
-import java.awt.Panel;
-import java.awt.Point;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.HashMap;
-
-import javax.swing.JComboBox;
-
 import com.zzk.grammar.RandomKVGrammar;
 import com.zzk.interpreter.GrammarInterpreterF;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.HashMap;
+
 /**
- * ¿Í»§¶Ë£¬»æÖÆ×Ô¶¨Òå·ÖĞÎÊ÷
+ * å®¢æˆ·ç«¯ï¼Œç»˜åˆ¶è‡ªå®šä¹‰åˆ†å½¢æ ‘
  * 
  * @author zzk
  */
 public class Client2 extends Frame {
 	/**
-	 * ĞòÁĞºÅ
+	 * åºåˆ—å·
 	 */
-	private static final int FRAME_WIDTH = 1000;// ´°¿Ú¿í¶È
-	private static final int FRAME_HEIGHT = 1000;// ´°¿Ú¸ß¶È
+	private static final int FRAME_WIDTH = 1000;// çª—å£å®½åº¦
+	private static final int FRAME_HEIGHT = 1000;// çª—å£é«˜åº¦
 	private static final long serialVersionUID = -1503870997066468394L;
-	private String grammarString;// ÎÄ·¨×Ö·û´®
-	private AbstractGrammar grammar;// Óï·¨·ÖÎöÆ÷
-	private Point startPoint = new Point(500, 900);// ÆğÊ¼Î»ÖÃ
-	private double startAngle = 90;// ÆğÊ¼½Ç¶È
-	private double rotateAngle = 25;// Ğı×ª½Ç
-	private int length = 5;// Ïß¶Î³¤¶È
-	private int n = 5;// µü´ú´ÎÊı
-	private AbstractGrammarInterpreter interpreter = null;// ½âÊÍÆ÷
+	private String grammarString;// æ–‡æ³•å­—ç¬¦ä¸²
+	private AbstractGrammar grammar;// è¯­æ³•åˆ†æå™¨
+	private Point startPoint = new Point(500, 900);// èµ·å§‹ä½ç½®
+	private double startAngle = 90;// èµ·å§‹è§’åº¦
+	private double rotateAngle = 25;// æ—‹è½¬è§’
+	private int length = 5;// çº¿æ®µé•¿åº¦
+	private int n = 5;// è¿­ä»£æ¬¡æ•°
+	private AbstractGrammarInterpreter interpreter = null;// è§£é‡Šå™¨
 	{
 		interpreter = new GrammarInterpreterF(length, grammarString, startPoint, startAngle, rotateAngle);
 	}
 
 	public void loadFrame() {
-		this.setTitle("×Ô¶¨Òå·ÖĞÎ");
+		this.setTitle("è‡ªå®šä¹‰åˆ†å½¢");
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setBackground(Color.WHITE);
-		this.setLocationRelativeTo(null);// ¾ÓÖĞ
+		this.setLocationRelativeTo(null);// å±…ä¸­
 		this.setResizable(false);
-		this.setFont(new Font("Ó×Ô²", Font.BOLD, 20));
+		this.setFont(new Font("å¹¼åœ†", Font.BOLD, 20));
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -60,34 +46,34 @@ public class Client2 extends Frame {
 			}
 		});
 		this.setLayout(null);
-		this.initComponent();// ³õÊ¼»¯×é¼ş
+		this.initComponent();// åˆå§‹åŒ–ç»„ä»¶
 		this.setVisible(true);
 	}
 
-	// ³õÊ¼»¯×é¼ş
+	// åˆå§‹åŒ–ç»„ä»¶
 	public void initComponent() {
-		Label tips = new Label("×Ô¶¨Òå²úÉúÊ½:(×ó²¿±ØĞëÓĞ°üº¬'F',ËùÓĞ×Ö·ûÖ»ÄÜÎª\n'+', '-', '[', ']','F'ÖĞµÄÒ»ÖÖ)");
+		Label tips = new Label("è‡ªå®šä¹‰äº§ç”Ÿå¼:(å·¦éƒ¨å¿…é¡»æœ‰åŒ…å«'F',æ‰€æœ‰å­—ç¬¦åªèƒ½ä¸º\n'+', '-', '[', ']','F'ä¸­çš„ä¸€ç§)");
 		tips.setBounds(200, 50, 1000, 50);
 		this.add(tips);
-		Panel pRight = new Panel();// °´Å¥ÇøÓòÃæ°å
+		Panel pRight = new Panel();// æŒ‰é’®åŒºåŸŸé¢æ¿
 		pRight.setLocation(250, 100);
 		pRight.setSize(500, 150);
-		Label product1 = new Label("²úÉúÊ½1:");
-		TextField left1 = new TextField(5);// ×ó²¿1
+		Label product1 = new Label("äº§ç”Ÿå¼1:");
+		TextField left1 = new TextField(5);// å·¦éƒ¨1
 		Label labelP1 = new Label("->");
-		TextField right1 = new TextField(15);// ÓÒ²¿1
+		TextField right1 = new TextField(15);// å³éƒ¨1
 
-		Label product2 = new Label("²úÉúÊ½2:");
-		TextField left2 = new TextField(5);// ×ó²¿2
+		Label product2 = new Label("äº§ç”Ÿå¼2:");
+		TextField left2 = new TextField(5);// å·¦éƒ¨2
 		Label labelP2 = new Label("->");
 		labelP2.setSize(20, 20);
-		TextField right2 = new TextField(15);// ÓÒ²¿2
+		TextField right2 = new TextField(15);// å³éƒ¨2
 
-		Button btnDraw = new Button("»æÖÆ");
+		Button btnDraw = new Button("ç»˜åˆ¶");
 		char start = 'F';
 		char[] notEnd = { 'F' };
 		char[] end = { '+', '-', '[', ']' };
-		String[] product = {};// Ê÷
+		String[] product = {};// æ ‘
 		btnDraw.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -114,7 +100,7 @@ public class Client2 extends Frame {
 				repaint();
 			}
 		});
-		Label label = new Label("µü´ú´ÎÊı");
+		Label label = new Label("è¿­ä»£æ¬¡æ•°");
 		Integer[] ints = { 1, 2, 3, 4, 5, 6, 7, 8 };
 		JComboBox<Integer> box = new JComboBox<>(ints);
 		box.setSelectedItem(n);

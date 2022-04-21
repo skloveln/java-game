@@ -1,55 +1,52 @@
 package com.zzk.snake.client;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 import com.zzk.snake.core.Food;
 import com.zzk.snake.core.MyFrame;
 import com.zzk.snake.core.MySnake;
 import com.zzk.snake.util.ImageUtil;
 
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 public class SnakeClient extends MyFrame{
 	
-	MySnake mySnake = new MySnake(100, 100);//Éß
-	Food food = new Food();//Ê³Îï
-	Image background = ImageUtil.images.get("background");//±³¾°Í¼Æ¬
-	Image fail = ImageUtil.images.get("fail");//ÓÎÏ·½áÊøµÄÎÄ×Ö
+	MySnake mySnake = new MySnake(100, 100);//è›‡
+	Food food = new Food();//é£Ÿç‰©
+	Image background = ImageUtil.images.get("background");//èƒŒæ™¯å›¾ç‰‡
+	Image fail = ImageUtil.images.get("fail");//æ¸¸æˆç»“æŸçš„æ–‡å­—
 	@Override
 	public void loadFrame() {
 		super.loadFrame();
-		//Ìí¼Ó¼üÅÌ¼àÌıÆ÷£¬´¦Àí¼üÅÌ°´ÏÂÊÂ¼ş
+		//æ·»åŠ é”®ç›˜ç›‘å¬å™¨ï¼Œå¤„ç†é”®ç›˜æŒ‰ä¸‹äº‹ä»¶
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				mySnake.keyPressed(e);//Î¯ÍĞ¸ømysnake
+				mySnake.keyPressed(e);//å§”æ‰˜ç»™mysnake
 			}
 		});
 	}
 	/**
-	 * »æÖÆ½çÃæ
+	 * ç»˜åˆ¶ç•Œé¢
 	 */
 	@Override
 	public void paint(Graphics g) {
-		g.drawImage(background, 0, 0, null);//»æÖÆ±³¾°
-		if(mySnake.live){//Èç¹ûÉß»î×Å£¬¾Í»æÖÆ
+		g.drawImage(background, 0, 0, null);//ç»˜åˆ¶èƒŒæ™¯
+		if(mySnake.live){//å¦‚æœè›‡æ´»ç€ï¼Œå°±ç»˜åˆ¶
 			mySnake.draw(g);
-			if(food.live){//Èç¹ûÊ³Îï»î×Å£¬¾Í»æÖÆ
+			if(food.live){//å¦‚æœé£Ÿç‰©æ´»ç€ï¼Œå°±ç»˜åˆ¶
 				food.draw(g);
-				food.eaten(mySnake);//ÅĞ¶ÏÊÇ·ñ±»³Ô
-			}else{//·ñÔò£¬²úÉúĞÂÊ³Îï
+				food.eaten(mySnake);//åˆ¤æ–­æ˜¯å¦è¢«åƒ
+			}else{//å¦åˆ™ï¼Œäº§ç”Ÿæ–°é£Ÿç‰©
 				food = new Food();
 			}
-		}else{//ÉßËÀÍö£¬µ¯³öÓÎÏ·½áÊø×ÖÑù
+		}else{//è›‡æ­»äº¡ï¼Œå¼¹å‡ºæ¸¸æˆç»“æŸå­—æ ·
 			g.drawImage(fail, (background.getWidth(null)-fail.getWidth(null))/2, (background.getHeight(null)-fail.getHeight(null))/2, null);
 		}
-		drawScore(g);//»æÖÆ·ÖÊı
+		drawScore(g);//ç»˜åˆ¶åˆ†æ•°
 	}
 	/**
-	 * »æÖÆ·ÖÊı
+	 * ç»˜åˆ¶åˆ†æ•°
 	 * @param g
 	 */
 	public void drawScore(Graphics g){
@@ -58,6 +55,6 @@ public class SnakeClient extends MyFrame{
 		g.drawString("SCORE:"+mySnake.score,700,100);
 	}
 	public static void main(String[] args) {
-		new SnakeClient().loadFrame();//¼ÓÔØ´°Ìå
+		new SnakeClient().loadFrame();//åŠ è½½çª—ä½“
 	}
 }

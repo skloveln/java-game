@@ -1,10 +1,9 @@
 package com.zzk.snake.core;
 
-import java.awt.Graphics;
-import java.awt.Point;
-
 import com.zzk.snake.constant.Constant;
 import com.zzk.snake.util.ImageUtil;
+
+import java.awt.*;
 
 public class Food extends SnakeObject{
 
@@ -18,18 +17,18 @@ public class Food extends SnakeObject{
 
 	}
 	/**
-	 * Ê³Îï±»³ÔµÄ·½·¨
+	 * é£Ÿç‰©è¢«åƒçš„æ–¹æ³•
 	 * @param mySnake
 	 */
 	public void eaten(MySnake mySnake){
 		if(mySnake.getRectangle().intersects(this.getRectangle())&&live&&mySnake.live){
-			this.live=false;//Ê³ÎïËÀÍö
-			mySnake.setLength(mySnake.getLength()+1);//³¤¶È¼ÓÒ»
-			mySnake.score+=10*mySnake.getLength();//¼Ó·Ö
+			this.live=false;//é£Ÿç‰©æ­»äº¡
+			mySnake.setLength(mySnake.getLength()+1);//é•¿åº¦åŠ ä¸€
+			mySnake.score+=10*mySnake.getLength();//åŠ åˆ†
 		}
 	}
 	/**
-	 * »æÖÆÊ³Îï
+	 * ç»˜åˆ¶é£Ÿç‰©
 	 */
 	@Override
 	public void draw(Graphics g) {

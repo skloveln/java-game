@@ -10,7 +10,7 @@ public class Constant {
 	public static final int BLOCK_HEIGHT = 40;
 	public static final int BLOCK_SPACE = 2;
 
-	public static final String IMG_PRE="com/zzk/teris/img/";//ͼƬ·��ǰ׺
+	public static final String IMG_PRE="com/zzk/teris/img/";//图片路径前缀
 
 	public static final int GAME_WIDTH = 42*14-3;
 	public static final int GAME_HEIGHT = 800;

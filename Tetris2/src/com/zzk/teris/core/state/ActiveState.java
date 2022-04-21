@@ -1,11 +1,11 @@
 package com.zzk.teris.core.state;
 
-import java.awt.Graphics;
-
 import com.zzk.teris.client.TerisClient;
 import com.zzk.teris.core.AbstractBlock;
 import com.zzk.teris.core.AbstractBlockState;
 import com.zzk.teris.core.Square;
+
+import java.awt.*;
 
 public class ActiveState extends AbstractBlockState {
 
@@ -25,9 +25,9 @@ public class ActiveState extends AbstractBlockState {
 
 	@Override
 	public void draw(Graphics g) {
-		block.move();// 移动
-		block.outOfBounds();// 处理越界问题
-		for (Square square : block.getSquareList()) {//绘制
+		block.move();// 绉诲姩
+		block.outOfBounds();// 澶勭悊瓒婄晫闂
+		for (Square square : block.getSquareList()) {//缁樺埗
 			square.draw(g);
 		}
 	}

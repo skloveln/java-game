@@ -1,17 +1,16 @@
 package com.zzk.grammar;
 
+import com.zzk.AbstractGrammar;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
-
-import com.zzk.AbstractGrammar;
-
 import java.util.Random;
 import java.util.Set;
 
 /**
- * Óï·¨·ÖÎöµü´úÆ÷
- * Ò»¸ökey¶ÔÓ¦Ò»¸övalue£¬Ã¿´Îµü´úÓ¦ÓÃÃ¿¸ökeyµÄvalue
+ * è¯­æ³•åˆ†æè¿­ä»£å™¨
+ * ä¸€ä¸ªkeyå¯¹åº”ä¸€ä¸ªvalueï¼Œæ¯æ¬¡è¿­ä»£åº”ç”¨æ¯ä¸ªkeyçš„value
  * @author zzk
  */
 public class SingleKVGrammar extends AbstractGrammar {
@@ -34,7 +33,7 @@ public class SingleKVGrammar extends AbstractGrammar {
 			entry = iterator.next();
 			String key = entry.getKey();
 			String[] value = entry.getValue();
-			if(!key.contains(getStart()+"")||value==null||value.length<1){//Èç¹û²úÉúÊ½×ó²¿²»°üº¬ÆğÊ¼·û£¬ÓÒ²¿³¤¶ÈĞ¡ÓÚ1
+			if(!key.contains(getStart()+"")||value==null||value.length<1){//å¦‚æœäº§ç”Ÿå¼å·¦éƒ¨ä¸åŒ…å«èµ·å§‹ç¬¦ï¼Œå³éƒ¨é•¿åº¦å°äº1
 				return false;
 			}
 		}
@@ -50,11 +49,11 @@ public class SingleKVGrammar extends AbstractGrammar {
 		HashMap<String, String[]> productMap = getProductMap();
 		if (n == 0)
 			return result;
-		Object[] keys = productMap.keySet().toArray();// keyÊı×é
-		for (int i = 0; i < n; i++) {// µü´ú
+		Object[] keys = productMap.keySet().toArray();// keyæ•°ç»„
+		for (int i = 0; i < n; i++) {// è¿­ä»£
 			for (Object key : keys) {
-				String[] values = productMap.get(key);// µÃµ½valuesÓÒ²¿Êı×é
-				result = result.replace((String) key, values[0]);//Ìæ»»
+				String[] values = productMap.get(key);// å¾—åˆ°valueså³éƒ¨æ•°ç»„
+				result = result.replace((String) key, values[0]);//æ›¿æ¢
 			}
 		}
 		System.out.println(result);

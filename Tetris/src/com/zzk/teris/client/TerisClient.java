@@ -1,22 +1,18 @@
 package com.zzk.teris.client;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.Random;
-
 import com.zzk.teris.constant.Constant;
 import com.zzk.teris.core.Block;
 import com.zzk.teris.core.MyFrame;
 import com.zzk.teris.core.Square;
 import com.zzk.teris.util.ImageUtil;
 
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Random;
+
 /**
- * ¿Í»§¶Ë
+ * å®¢æˆ·ç«¯
  * 
  * @author zzk
  */
@@ -61,7 +57,7 @@ public class TerisClient extends MyFrame {
 		}
 	}
 	/**
-	 * »æÖÆÔË¶¯µÄ·½¿é
+	 * ç»˜åˆ¶è¿åŠ¨çš„æ–¹å—
 	 */
 	private void drawActiveBlock(Graphics g) {
 		if(block.getState()==Block.STATE_STOPED){
@@ -72,13 +68,13 @@ public class TerisClient extends MyFrame {
 		}
 	}
 	/**
-	 *»æÖÆ¾²Ö¹µÄ·½¿é
+	 *ç»˜åˆ¶é™æ­¢çš„æ–¹å—
 	 * @param g
 	 */
 	private void drawStopSquare(Graphics g) {
-		for (int i = 1; i < squares.length; i++) {//ĞĞºÅ
+		for (int i = 1; i < squares.length; i++) {//è¡Œå·
 			boolean isFull=true;
-			for (int j = 1; j < squares[i].length; j++) {//ÁĞºÅ
+			for (int j = 1; j < squares[i].length; j++) {//åˆ—å·
 				if (squares[i][j] != null) {
 					squares[i][j].draw(g);
 					g.setColor(Color.BLACK);
@@ -87,14 +83,14 @@ public class TerisClient extends MyFrame {
 					isFull=false;
 				}
 			}
-			if(isFull){//Èç¹ûÒ»ĞĞÂúÁË£¬Ïû³ı
+			if(isFull){//å¦‚æœä¸€è¡Œæ»¡äº†ï¼Œæ¶ˆé™¤
 				eliminate(i);
 				System.out.println(1);
 			}
 		}
 	}
 	/**
-	 * Ïû³ıÖ¸¶¨ĞĞ
+	 * æ¶ˆé™¤æŒ‡å®šè¡Œ
 	 */
 	private void eliminate(int line){
 		score+=10;
@@ -119,26 +115,26 @@ public class TerisClient extends MyFrame {
 		g.setColor(Color.WHITE);
 		g.fillRect(Constant.GAME_X_LEFT, Constant.GAME_Y_UP, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
 		g.setColor(Color.RED);
-		//»æÖÆºì¿ò
+		//ç»˜åˆ¶çº¢æ¡†
 		for (int i = 1; i <= 6; i++) {
 			g.drawRect(Constant.GAME_X_LEFT - i, Constant.GAME_Y_UP - i, Constant.GAME_WIDTH + 2 * i,
 					Constant.GAME_HEIGHT + 2 * i);
 			g.drawRect(Constant.GAME_X_RIGHT+i, Constant.GAME_Y_UP - i, 300, 300);
 			g.drawRect(Constant.GAME_X_RIGHT+i, Constant.GAME_Y_UP +300- i, 300, 300);
 		}
-		//»æÖÆÏÂÒ»¸ö·½¿é
+		//ç»˜åˆ¶ä¸‹ä¸€ä¸ªæ–¹å—
 		drawNextBlock(g);
-		g.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 40));
-		//»æÖÆ·ÖÊı
-		g.drawString("·Ö  Êı :"+score, Constant.GAME_X_RIGHT+30, Constant.GAME_Y_UP+350);
+		g.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 40));
+		//ç»˜åˆ¶åˆ†æ•°
+		g.drawString("åˆ†  æ•° :"+score, Constant.GAME_X_RIGHT+30, Constant.GAME_Y_UP+350);
 	}
 	public static int score=0;
 	/**
-	 * »æÖÆÏÂÒ»¸ö·½¿é
+	 * ç»˜åˆ¶ä¸‹ä¸€ä¸ªæ–¹å—
 	 * @param g
 	 */
 	private void drawNextBlock(Graphics g) {
-		g.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 50));
+		g.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 50));
 		g.setColor(Color.BLACK);
 		g.drawString("NEXT", Constant.GAME_X_RIGHT+50, Constant.GAME_Y_UP+50);
 		for (Rectangle rect : nextBlock.squareList) {

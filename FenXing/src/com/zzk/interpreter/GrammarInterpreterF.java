@@ -1,12 +1,11 @@
 package com.zzk.interpreter;
 
-import java.awt.Graphics;
-import java.awt.Point;
-
 import com.zzk.AbstractGrammarInterpreter;
 import com.zzk.util.DrawUtil;
+
+import java.awt.*;
 /**
- * ½âÊÍÆ÷F
+ * è§£é‡Šå™¨F
  * @author zzk
  */
 public class GrammarInterpreterF extends AbstractGrammarInterpreter implements Cloneable{
@@ -18,10 +17,10 @@ public class GrammarInterpreterF extends AbstractGrammarInterpreter implements C
 	public GrammarInterpreterF(int length, String grammarString, Point startPoint, double startAngle, double rotateAngle) {
 		super(length, grammarString, startPoint, startAngle, rotateAngle);
 		if (length >= 100)
-			isSymmetricalTree = true;// ³¤¶ÈÎª100£¬´ò¿ª³¤¶È×Ô¼õ¿ª¹Ø
+			isSymmetricalTree = true;// é•¿åº¦ä¸º100ï¼Œæ‰“å¼€é•¿åº¦è‡ªå‡å¼€å…³
 	}
 	/**
-	 * ¸ù¾İÊ½×Ó½øĞĞ½âÊÍ£¬»æÍ¼
+	 * æ ¹æ®å¼å­è¿›è¡Œè§£é‡Šï¼Œç»˜å›¾
 	 * @param g
 	 */
 	@Override
@@ -29,25 +28,25 @@ public class GrammarInterpreterF extends AbstractGrammarInterpreter implements C
 		if(grammarString==null) return;
 		for (char ch : grammarString.toCharArray()) {
 			switch (ch) {
-			case 'F':// »­Ïß
+			case 'F':// ç”»çº¿
 				startPoint = DrawUtil.drawLine(g, startPoint, startAngle, length);
 				break;
-			case '+':// ×ó×ªrotateAngle¶È
+			case '+':// å·¦è½¬rotateAngleåº¦
 				startAngle += rotateAngle;
 				break;
-			case '-':// ÓÒ×ªrotateAngle¶È
+			case '-':// å³è½¬rotateAngleåº¦
 				startAngle -= rotateAngle;
 				break;
-			case '[':// ±£´æµ±Ç°×´Ì¬
+			case '[':// ä¿å­˜å½“å‰çŠ¶æ€
 				try {
 					stack.push((GrammarInterpreterF) this.clone());
 				} catch (CloneNotSupportedException e) {
 					e.printStackTrace();
 				}
 				if (isSymmetricalTree)
-					length -= 10;// ¶Ô³Æ·ÖĞÎÊ÷Ê±´ò¿ª
+					length -= 10;// å¯¹ç§°åˆ†å½¢æ ‘æ—¶æ‰“å¼€
 				break;
-			case ']':// »Øµ½ÉÏÒ»²½
+			case ']':// å›åˆ°ä¸Šä¸€æ­¥
 				GrammarInterpreterF d = (GrammarInterpreterF) stack.pop();
 				this.startPoint = d.startPoint;
 				this.startAngle = d.startAngle;

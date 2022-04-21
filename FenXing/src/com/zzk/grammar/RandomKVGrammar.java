@@ -1,12 +1,12 @@
 package com.zzk.grammar;
 
+import com.zzk.AbstractGrammar;
+
 import java.util.HashMap;
 import java.util.Random;
 
-import com.zzk.AbstractGrammar;
-
 /**
- * Óï·¨·ÖÎöµü´úÆ÷ ×óÓÒ²¿È«Ëæ»ú£¬Ã¿´Îµü´úÖ»Ó¦ÓÃÒ»¸ö²úÉúÊ½¹æÔò
+ * è¯­æ³•åˆ†æè¿­ä»£å™¨ å·¦å³éƒ¨å…¨éšæœºï¼Œæ¯æ¬¡è¿­ä»£åªåº”ç”¨ä¸€ä¸ªäº§ç”Ÿå¼è§„åˆ™
  * 
  * @author zzk
  */
@@ -24,7 +24,7 @@ public class RandomKVGrammar extends AbstractGrammar {
 	}
 
 	/**
-	 * Ëæ»úkey£¬Ëæ»úvalue,µü´ú²úÉú×Ö·û´®
+	 * éšæœºkeyï¼Œéšæœºvalue,è¿­ä»£äº§ç”Ÿå­—ç¬¦ä¸²
 	 */
 	@Override
 	public String product(int n) {
@@ -35,12 +35,12 @@ public class RandomKVGrammar extends AbstractGrammar {
 		HashMap<String, String[]> productMap = getProductMap();
 		if (n == 0)
 			return result;
-		Object[] keys = productMap.keySet().toArray();// ¼üÊı×é
-		for (int i = 0; i < n; i++) {// µü´ú
-			String key = (String) keys[r.nextInt(keys.length)];// Ëæ»ú»ñÈ¡Ò»¸ö¼ü
-			String[] values = productMap.get(key);// µÃµ½²úÉúÊ½Êı×é
+		Object[] keys = productMap.keySet().toArray();// é”®æ•°ç»„
+		for (int i = 0; i < n; i++) {// è¿­ä»£
+			String key = (String) keys[r.nextInt(keys.length)];// éšæœºè·å–ä¸€ä¸ªé”®
+			String[] values = productMap.get(key);// å¾—åˆ°äº§ç”Ÿå¼æ•°ç»„
 			String value = values[r.nextInt(values.length)];
-			result = result.replace(key, value);// Ëæ»úÓ¦ÓÃÒ»¸ö²úÉúÊ½
+			result = result.replace(key, value);// éšæœºåº”ç”¨ä¸€ä¸ªäº§ç”Ÿå¼
 		}
 		System.out.println("result:"+result);
 		return result;

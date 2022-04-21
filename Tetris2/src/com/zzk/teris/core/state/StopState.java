@@ -1,13 +1,13 @@
 package com.zzk.teris.core.state;
 
-import java.awt.Graphics;
-import java.util.List;
-
 import com.zzk.teris.client.TerisClient;
 import com.zzk.teris.constant.Constant;
 import com.zzk.teris.core.AbstractBlock;
 import com.zzk.teris.core.AbstractBlockState;
 import com.zzk.teris.core.Square;
+
+import java.awt.*;
+import java.util.List;
 
 public class StopState extends AbstractBlockState{
 
@@ -29,7 +29,7 @@ public class StopState extends AbstractBlockState{
 
 	@Override
 	public void draw(Graphics g) {
-		block.getState().saveSquares();// ±£¥Êsquare
+		block.getState().saveSquares();// ‰øùÂ≠òsquare
 		block.setState(new StopedState(getBlock()));;
 	}
 

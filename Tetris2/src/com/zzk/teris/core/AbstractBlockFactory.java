@@ -2,7 +2,7 @@ package com.zzk.teris.core;
 
 import java.awt.Color;
 /**
- * ³éÏó¿é¹¤³§
+ * æŠ½è±¡å—å·¥å‚
  * @author zzk
  *
  */

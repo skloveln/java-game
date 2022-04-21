@@ -1,12 +1,11 @@
 package com.zzk.interpreter;
 
-import java.awt.Graphics;
-import java.awt.Point;
-
 import com.zzk.AbstractGrammarInterpreter;
 import com.zzk.util.DrawUtil;
+
+import java.awt.*;
 /**
- * ½âÊÍÆ÷AB
+ * è§£é‡Šå™¨AB
  * @author zzk
  */
 public class GrammarInterpreterAB extends AbstractGrammarInterpreter implements Cloneable{
@@ -18,7 +17,7 @@ public class GrammarInterpreterAB extends AbstractGrammarInterpreter implements 
 		super(length, grammarString, startPoint, startAngle, rotateAngle);
 	}
 	/**
-	 * ¸ù¾İÊ½×Ó½øĞĞ½âÊÍ£¬»æÍ¼
+	 * æ ¹æ®å¼å­è¿›è¡Œè§£é‡Šï¼Œç»˜å›¾
 	 * @param g
 	 */
 	@Override
@@ -26,13 +25,13 @@ public class GrammarInterpreterAB extends AbstractGrammarInterpreter implements 
 		if(grammarString==null) return;
 		for (char ch : grammarString.toCharArray()) {
 			switch (ch) {
-			case 'A':// »­Ïß
+			case 'A':// ç”»çº¿
 				startPoint = DrawUtil.drawLine(g, startPoint, startAngle, length);
 				break;
 			case 'B':
 				startPoint = DrawUtil.drawLine(g, startPoint, startAngle, length);
 				break;
-			case '[':// ±£´æ×´Ì¬²¢×ó×ªrotateAngle¶È
+			case '[':// ä¿å­˜çŠ¶æ€å¹¶å·¦è½¬rotateAngleåº¦
 				try {
 					stack.push((GrammarInterpreterAB) this.clone());
 				} catch (CloneNotSupportedException e) {
@@ -40,7 +39,7 @@ public class GrammarInterpreterAB extends AbstractGrammarInterpreter implements 
 				}
 				startAngle -= rotateAngle;
 				break;
-			case '('://±£´æ×´Ì¬²¢ÓÒ×ªrotateAngle¶È
+			case '('://ä¿å­˜çŠ¶æ€å¹¶å³è½¬rotateAngleåº¦
 				try {
 					stack.push((GrammarInterpreterAB) this.clone());
 				} catch (CloneNotSupportedException e) {
@@ -48,7 +47,7 @@ public class GrammarInterpreterAB extends AbstractGrammarInterpreter implements 
 				}
 				startAngle += rotateAngle;
 				break;
-			case ']'://»Øµ½ÉÏÒ»²½
+			case ']'://å›åˆ°ä¸Šä¸€æ­¥
 			case ')':
 				GrammarInterpreterAB d = (GrammarInterpreterAB) stack.pop();
 				this.startPoint = d.startPoint;

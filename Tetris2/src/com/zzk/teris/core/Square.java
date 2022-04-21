@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 /**
- * 基础方块类，用于组成每个不同形状的块
+ * 鍩虹鏂瑰潡绫伙紝鐢ㄤ簬缁勬垚姣忎釜涓嶅悓褰㈢姸鐨勫潡
  * @author zzk
  */
 public class Square extends Rectangle implements Drawable,Cloneable{
@@ -23,7 +23,7 @@ public class Square extends Rectangle implements Drawable,Cloneable{
 		this.color = color;
 	}
 	/**
-	 * 绘制方块
+	 * 缁樺埗鏂瑰潡
 	 */
 	@Override
 	public void draw(Graphics g) {

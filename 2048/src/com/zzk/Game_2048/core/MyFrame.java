@@ -1,12 +1,10 @@
 package com.zzk.Game_2048.core;
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Image;
+import com.zzk.Game_2048.constant.Constant;
+
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import com.zzk.Game_2048.constant.Constant;
 
 public class MyFrame extends Frame{
 	/**
@@ -15,13 +13,13 @@ public class MyFrame extends Frame{
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 加载窗体
+	 * 鍔犺浇绐椾綋
 	 */
 	public void loadFrame(){
 		this.setTitle("2048");
 		this.setSize(Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
 		this.setBackground(Color.WHITE);
-		this.setLocationRelativeTo(null);//居中
+		this.setLocationRelativeTo(null);//灞呬腑
 		
 		this.addWindowListener(new WindowAdapter() {
 			@Override
@@ -35,7 +33,7 @@ public class MyFrame extends Frame{
 		new MyThread().start();
 	}
 	/**
-	 * 防止图片闪烁
+	 * 闃叉鍥剧墖闂儊
 	 * 
 	 * @param g
 	 */
@@ -55,7 +53,7 @@ public class MyFrame extends Frame{
 		g.drawImage(backImg, 0, 0, null);
 	}
 	/**
-	 * 这种 创建一个重新画的线程内部类
+	 * 杩欑 鍒涘缓涓�涓噸鏂扮敾鐨勭嚎绋嬪唴閮ㄧ被
 	 * 
 	 * @param args
 	 */
