@@ -35,32 +35,7 @@ public class MusicUtil {
 	 * @return
 	 */
 	public static void asyncPlay(String filePath) {
-		ForkJoinPool.commonPool().execute(() -> {
-			try {
-				BufferedInputStream buffer = new BufferedInputStream(new FileInputStream(filePath));
-				new Player(buffer).play();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
+		ForkJoinPool.commonPool().execute(() -> play(filePath));
 	}
 
-	/**
-	 * 播放 mp3 格式的音乐文件
-	 *
-	 * @param filePath 音乐文件路径
-	 * @param loop 是否循环播放
-	 */
-	public static void play(String filePath, boolean loop) {
-		ForkJoinPool.commonPool().execute(() -> {
-			do {
-				try {
-					BufferedInputStream buffer = new BufferedInputStream(new FileInputStream(filePath));
-					new Player(buffer).play();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} while (loop);
-		});
-	}
 }

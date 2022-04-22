@@ -11,6 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ForkJoinPool;
 
 
 public class PlaneWarClient extends MyFrame {
@@ -24,6 +25,7 @@ public class PlaneWarClient extends MyFrame {
     public List<Item> items = new CopyOnWriteArrayList<>();
     public List<MusicUtil> musics = new CopyOnWriteArrayList<>();
     private final long start = System.currentTimeMillis(); // 程序启动时间
+    private static boolean gameOver; // 游戏是否结束
 
     public void generateEnemy() {
 
@@ -98,7 +100,11 @@ public class PlaneWarClient extends MyFrame {
         // 运行程序
         super.launchFrame();
         // 播放背景音乐
-        MusicUtil.asyncPlay(FileUtil.getFilePath(Constant.MUSIC_PRE + "bgm.mp3"));
+        ForkJoinPool.commonPool().execute(() -> {
+            do {
+                MusicUtil.play(FileUtil.getFilePath(Constant.MUSIC_PRE + "bgm.mp3"));
+            } while (!PlaneWarClient.gameOver);
+        });
         // 生成敌人
         generateEnemy();
         // 生成战机
@@ -149,6 +155,7 @@ public class PlaneWarClient extends MyFrame {
                 g.drawImage(img1, (Constant.GAME_WIDTH - img1.getWidth(null)) / 2,
                         (Constant.GAME_HEIGHT - img1.getHeight(null)) / 2, null);
             }
+            gameOver = true;
         }
 
     }

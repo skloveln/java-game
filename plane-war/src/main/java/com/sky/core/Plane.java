@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.ForkJoinPool;
 
 @NoArgsConstructor
 public class Plane extends PlaneWarObject {
@@ -22,7 +23,7 @@ public class Plane extends PlaneWarObject {
     public boolean live = true; // 是否存活
     public int superFireCount = 3; // 大招剩余次数
     public boolean fire; // 是否开火
-    private boolean superFire; // 是否放大招
+    private boolean fireMusicIsPlay; // 开火音乐是否播放结束
 
     public Plane(PlaneWarClient pwc, boolean good) {
         this.fire = false;
@@ -83,12 +84,17 @@ public class Plane extends PlaneWarObject {
      * 我方飞机发子弹的方法
      */
     public void fire() {
-        // pwc.musics.add(mu);
-        MusicUtil.asyncPlay(FileUtil.getFilePath(Constant.MUSIC_PRE + "fire3.mp3"));
         Missile missile = new Missile(pwc, this.x, this.y, "myPlane_missile_0" + type + "_0" + level, good);
         missile.x += (this.width - missile.width) / 2;
         missile.y -= height;
         pwc.missiles.add(missile);
+        ForkJoinPool.commonPool().execute(() -> {
+            if (!fireMusicIsPlay) {
+                fireMusicIsPlay = true;
+                MusicUtil.play(FileUtil.getFilePath(Constant.MUSIC_PRE + "fire3.mp3"));
+                fireMusicIsPlay = false;
+            }
+        });
     }
 
     /**
@@ -109,7 +115,6 @@ public class Plane extends PlaneWarObject {
             }
             superFireCount--;
         }
-        superFire = false;
     }
 
 
@@ -199,7 +204,6 @@ public class Plane extends PlaneWarObject {
                 up = true;
                 break;
             case KeyEvent.VK_J:// 发子弹
-                superFire = false;
                 fire = true;
                 break;
             case KeyEvent.VK_SPACE:// 发超级子弹
