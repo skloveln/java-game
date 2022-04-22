@@ -7,9 +7,11 @@ import com.sky.util.ImageUtil;
 import java.util.List;
 
 public class Missile extends PlaneWarObject {
+
 	boolean live;
 	int speed;
 	int type;
+
 	public Missile() {
 		super();
 	}
@@ -18,7 +20,7 @@ public class Missile extends PlaneWarObject {
 		this.live = true;
 		this.x = x;
 		this.y = y;
-		this.img = ImageUtil.images.get(imageName);
+		this.img = ImageUtil.get(imageName);
 		this.width = img.getWidth(null);
 		this.height = img.getWidth(null);
 		this.pwc = pwc;
@@ -43,9 +45,9 @@ public class Missile extends PlaneWarObject {
 		if(this.getRectangle().intersects(p.getRectangle())&&this.good!=p.isGood()&&p.live){
 			this.live=false;
 			if(p.level>=1){
-				p.blood-= 10*p.level;
+				p.blood -= 10*p.level;
 			}else{
-				p.blood-= 20;
+				p.blood -= 20;
 			}
 			pwc.missiles.remove(this);
 			return true;

@@ -35,7 +35,7 @@ public class Background implements Drawable,Moveable{
 		super();
 		this.xSpeed = xSpeed;
 		this.ySpeed = ySpeed;
-		this.backImg = ImageUtil.images.get(imageName);
+		this.backImg = ImageUtil.get(imageName);
 	}
 	@Override
 	public void draw(Graphics g) {

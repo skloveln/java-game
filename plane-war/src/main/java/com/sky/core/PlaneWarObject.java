@@ -4,7 +4,7 @@ import com.sky.client.PlaneWarClient;
 
 import java.awt.*;
 
-public abstract class PlaneWarObject implements Drawable,Moveable{
+public abstract class PlaneWarObject implements Drawable, Moveable {
 	//建立关系(大关系)
 	//调停者设计模式
 	public PlaneWarClient pwc;
@@ -33,11 +33,13 @@ public abstract class PlaneWarObject implements Drawable,Moveable{
 	public void setGood(boolean good) {
 		this.good = good;
 	}
+
 	/**
 	 * 让子类自己实现自己的move方法
 	 */
 	@Override
 	public abstract void move();
+
 	/**
 	 * 获取子弹对应的矩形
 	 */

@@ -3,19 +3,27 @@ package com.sky.core;
 import com.sky.client.PlaneWarClient;
 import com.sky.constant.Constant;
 import com.sky.util.ImageUtil;
+import lombok.NoArgsConstructor;
 
 import java.awt.*;
 import java.util.Random;
 
+@NoArgsConstructor
 public class EnemyPlane extends Plane {
 	public int type;// 类型
 	public int exp;// 经验
-
-	/**
-	 * 无参构造
-	 */
-	public EnemyPlane() {
-		super();
+	static Random random = new Random();
+	static int count[] = new int[6];
+	Point center = new Point(Constant.GAME_WIDTH / 2, Constant.GAME_HEIGHT / 2);
+	double theta;
+	int r = 100;
+	public static Image images[] = new Image[24];
+	static {
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 4; j++) {
+				images[4 * i + j] = ImageUtil.get("enemyPlane_0" + (i+1) + "_0" + (j+1));
+			}
+		}
 	}
 
 	/**
@@ -31,14 +39,14 @@ public class EnemyPlane extends Plane {
 		this.x = x;
 		this.y = y;
 		if (type == 100) {
-			img = ImageUtil.images.get("enemyPlane_boss_01");
+			img = ImageUtil.get("enemyPlane_boss_01");
 			this.width = img.getWidth(null);
 			this.height = img.getHeight(null);
-			this.blood = Constant.ENEMYPLANE_BOSS_MAX_BOOLD;
+			this.blood = Constant.ENEMY_PLANE_BOSS_MAX_BLOOD;
 		} else {
 			this.width = images[type * 4 - 4].getWidth(null);
 			this.height = images[type * 4 - 4].getHeight(null);
-			this.blood = Constant.ENEMYPLANE_MAX_BOOLD;
+			this.blood = Constant.ENEMY_PLANE_MAX_BLOOD;
 		}
 		this.speed = 0.3 + 0.1 * type;
 		this.type = type;
@@ -68,18 +76,6 @@ public class EnemyPlane extends Plane {
 			missile.x += (this.width - missile.width) / 2;
 			missile.y += height;
 			pwc.missiles.add(missile);
-		}
-	}
-
-	Point center = new Point(Constant.GAME_WIDTH / 2, Constant.GAME_HEIGHT / 2);
-	double theta;
-	int r = 100;
-	public static Image images[] = new Image[24];
-	static {
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 4; j++) {
-				images[4 * i + j] = ImageUtil.images.get("enemyPlane_0" + (i + 1) + "_0" + (j + 1));
-			}
 		}
 	}
 
@@ -141,9 +137,6 @@ public class EnemyPlane extends Plane {
 		}
 	}
 
-	static Random random = new Random();
-	static int count[] = new int[6];
-
 	@Override
 	public void draw(Graphics g) {
 
@@ -189,22 +182,22 @@ public class EnemyPlane extends Plane {
 	 * @param g
 	 */
 	private void drawBlood(Graphics g) {
-		Image bloodImg = ImageUtil.images.get("blood");
-		Image blood_blank = ImageUtil.images.get("blood_blank");
+		Image bloodImg = ImageUtil.get("blood");
+		Image blood_blank = ImageUtil.get("blood_blank");
 		int i = 0;
 		for (; i < width / bloodImg.getWidth(null); i++) {
 			g.drawImage(bloodImg, x + bloodImg.getWidth(null) * i, y + height, null);
 		}
 		if(type==100){
-			int num = (int) (((double) (bloodImg.getWidth(null) * i) / (Constant.ENEMYPLANE_BOSS_MAX_BOOLD))
-					* (Constant.ENEMYPLANE_BOSS_MAX_BOOLD - blood) / blood_blank.getWidth(null));
+			int num = (int) (((double) (bloodImg.getWidth(null) * i) / (Constant.ENEMY_PLANE_BOSS_MAX_BLOOD))
+					* (Constant.ENEMY_PLANE_BOSS_MAX_BLOOD - blood) / blood_blank.getWidth(null));
 			for (int j = 0; j < num; j++) {
 				g.drawImage(blood_blank, x + bloodImg.getWidth(null) * i - blood_blank.getWidth(null) * (j + 1), y + height,
 						null);
 			}
 		}else{
-			int num = (int) (((double) (bloodImg.getWidth(null) * i) / (Constant.ENEMYPLANE_MAX_BOOLD))
-					* (Constant.ENEMYPLANE_MAX_BOOLD - blood) / blood_blank.getWidth(null));
+			int num = (int) (((double) (bloodImg.getWidth(null) * i) / (Constant.ENEMY_PLANE_MAX_BLOOD))
+					* (Constant.ENEMY_PLANE_MAX_BLOOD - blood) / blood_blank.getWidth(null));
 			for (int j = 0; j < num; j++) {
 				g.drawImage(blood_blank, x + bloodImg.getWidth(null) * i - blood_blank.getWidth(null) * (j + 1), y + height,
 						null);

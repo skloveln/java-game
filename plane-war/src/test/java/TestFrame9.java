@@ -1,19 +1,18 @@
-package com.sky.test;
-
 import com.sky.constant.Constant;
 import com.sky.core.MyFrame;
-import com.sky.util.GameUtil;
+import com.sky.util.FileUtil;
 
 import java.awt.*;
 
 /**
- * 抛物线
+ * 星形线
  * @author zzk
- *
+ *x=a*(2*cos(t)-cos(2*t))
+ *y=a*(2*sin(t)-sin(2*t))
  */
-public class TestFrame5 extends MyFrame {
+public class TestFrame9 extends MyFrame {
 
-	Image background = GameUtil.getImage("com/neusoft/planewar/img/ball.png");
+	Image background = FileUtil.getImage("planewar/img/ball.png");
 	int x = 0;
 	int y = 0;
 	int width = background.getWidth(null);// 得到当前图片的宽度
@@ -21,25 +20,22 @@ public class TestFrame5 extends MyFrame {
 	/**
 	 * 任意角度theta
 	 */
+	Point center = new Point((Constant.GAME_WIDTH-width)/2, (Constant.GAME_HEIGHT-height)/2);
 	double theta;
-	int p = 5;
-
-	double speed = 0.5;
-
+	double speed = 0.05;
 	// double theta = Math.PI/6;
 	@Override
 	public void paint(Graphics g) {
 		g.drawImage(background, x, y, null);
-		int t = (int) (Math.sin(theta + Math.PI / 2) / Math.cos(theta + Math.PI / 2));
-		x = (Constant.GAME_WIDTH - width) / 2 + (int) (2 * p * t);
-		y = 30 + (int) (t * t);
+		x=(int) (center.x+500*Math.pow(Math.cos(theta), 3));
+		y=(int) (center.y+500*Math.pow(Math.sin(theta), 3));
 
 		theta += speed;
 
 	}
 
 	public static void main(String[] args) {
-		TestFrame5 tf = new TestFrame5();
+		TestFrame9 tf = new TestFrame9();
 		tf.launchFrame();
 	}
 }

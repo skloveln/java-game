@@ -25,7 +25,7 @@ public class Explode extends PlaneWarObject {
 	public static Image images[] = new Image[8];
 	static {
 		for (int i = 0; i < 8; i++) {
-			images[i]= ImageUtil.images.get("explode_0"+(i+1));
+			images[i]= ImageUtil.get("explode_0"+(i+1));
 		}
 	}
 

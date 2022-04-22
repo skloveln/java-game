@@ -6,7 +6,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
 /**
- * 描述：
+ * 描述：测试用例
  *
  * @author sukai
  * @date 2022/4/21
@@ -19,8 +19,7 @@ public class TestPlayMusic {
         assert url != null;
         String filePath = URLDecoder.decode(url.getPath(), StandardCharsets.UTF_8.name()) + "music/bgm.mp3";
         System.out.println(filePath);
-        MusicUtil musicUtil = new MusicUtil(filePath);
-        musicUtil.run();
+        MusicUtil.play(filePath);
     }
 
 }

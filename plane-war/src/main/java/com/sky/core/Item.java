@@ -2,6 +2,7 @@ package com.sky.core;
 
 import com.sky.client.PlaneWarClient;
 import com.sky.constant.Constant;
+import com.sky.util.FileUtil;
 import com.sky.util.ImageUtil;
 import com.sky.util.MusicUtil;
 
@@ -27,7 +28,7 @@ public class Item extends PlaneWarObject {
 	static Image imgs[] = new Image[6];
 	static {
 		for (int i = 0; i < imgs.length; i++) {
-			imgs[i] = ImageUtil.images.get("item_0" + (i + 1));
+			imgs[i] = ImageUtil.get("item_0" + (i + 1));
 		}
 	}
 	int changeY = 2;
@@ -78,7 +79,7 @@ public class Item extends PlaneWarObject {
 			generateEffect(g);
 			long end = System.currentTimeMillis();
 			if(end-effectStart>=50&&end-effectStart<100)
-				new MusicUtil("getItem").start();
+				MusicUtil.asyncPlay(FileUtil.getFilePath(Constant.MUSIC_PRE + "getItem.mp3"));
 			if(end-effectStart>=5000&&end-effectStart<=5100){
 				pwc.items.remove(this);
 			}
@@ -98,15 +99,15 @@ public class Item extends PlaneWarObject {
 			}
 			break;
 		case 3:// 加血
-			if (myPlane.blood >= (Constant.MYPLANE_MAX_BOOLD - 20)) {
-				myPlane.blood = Constant.MYPLANE_MAX_BOOLD;
+			if (myPlane.blood >= (Constant.PLANE_MAX_BLOOD - 20)) {
+				myPlane.blood = Constant.PLANE_MAX_BLOOD;
 			} else {
 				myPlane.blood += 20;
 				preBlood+=20;
 			}
 			break;
 		case 4:// 防护罩
-			Image img = ImageUtil.images.get("effect_0" + (type));
+			Image img = ImageUtil.get("effect_0" + (type));
 			g.drawImage(img, myPlane.x + (myPlane.width - img.getWidth(null)) / 2,
 					myPlane.y + (myPlane.height - img.getHeight(null)) / 2, null);
 			myPlane.blood=preBlood;

@@ -1,7 +1,5 @@
-package com.sky.test;
-
 import com.sky.core.MyFrame;
-import com.sky.util.GameUtil;
+import com.sky.util.FileUtil;
 
 import java.awt.*;
 
@@ -12,7 +10,7 @@ import java.awt.*;
 public class TestFrame extends MyFrame {
 
 
-	Image background = GameUtil.getImage("com/neusoft/planewar/img/background.png");
+	Image background = FileUtil.getImage("img/background.png");
 	int x = 0;
 	int y = 0;
 	int xSpeed = 1;

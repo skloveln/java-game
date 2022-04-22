@@ -1,9 +1,6 @@
-package com.sky.test;
-
-
 import com.sky.constant.Constant;
 import com.sky.core.MyFrame;
-import com.sky.util.GameUtil;
+import com.sky.util.FileUtil;
 
 import java.awt.*;
 
@@ -15,7 +12,7 @@ import java.awt.*;
  */
 public class TestFrame12 extends MyFrame {
 
-	Image background = GameUtil.getImage("com/neusoft/planewar/img/ball.png");
+	Image background = FileUtil.getImage("img/ball.png");
 	int x = 0;
 	int y = 0;
 	int width = background.getWidth(null);// 得到当前图片的宽度
