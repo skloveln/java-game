@@ -4,37 +4,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.sky.game</groupId>
-        <artifactId>java-game</artifactId>
-        <version>1.0.0</version>
-    </parent>
-
-    <artifactId>plane-war</artifactId>
+    <groupId>com.sky.game</groupId>
+    <artifactId>java-game</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+    <name>java-game</name>
+
+    <modules>
+        <module>2048</module>
+        <module>plane-war</module>
+        <module>tetris</module>
+        <module>snake</module>
+    </modules>
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.14</version>
-        </dependency>
-        <dependency>
-            <groupId>jl</groupId>
-            <artifactId>jl</artifactId>
-            <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/jl1.0.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -58,5 +47,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <developers>
+        <developer>
+            <id>sky</id>
+            <name>sky</name>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
 
 </project>
